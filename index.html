@@ -8,24 +8,39 @@
 <meta name="keywords" content="NIMT School Ghaziabad, best CBSE school Ghaziabad, boarding school Shastri Nagar, top school Ghaziabad admission 2026, English medium school Ghaziabad, school near me Ghaziabad">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="author" content="NIMT School Ghaziabad">
-<link rel="canonical" href="https://nimtschool.edu.in/">
+<link rel="canonical" href="https://school.nimt.ac.in/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_IN">
-<meta property="og:url" content="https://nimtschool.edu.in/">
+<meta property="og:url" content="https://school.nimt.ac.in/">
 <meta property="og:site_name" content="NIMT School Ghaziabad">
 <meta property="og:title" content="NIMT School Ghaziabad | Best CBSE Boarding School | Admissions 2026">
 <meta property="og:description" content="Top CBSE boarding school in Ghaziabad – robotics labs, sports, holistic development. Limited seats for 2026. Apply now.">
-<meta property="og:image" content="https://nimtschool.edu.in/images/campus-hero.jpg">
+<meta property="og:image" content="https://school.nimt.ac.in/images/campus-hero.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NIMT School Ghaziabad | Best CBSE Boarding School | Admissions 2026">
 <meta name="twitter:description" content="Top CBSE boarding school in Ghaziabad – Robotics, sports, holistic development. Apply for 2026.">
-<meta name="twitter:image" content="https://nimtschool.edu.in/images/campus-hero.jpg">
+<meta name="twitter:image" content="https://school.nimt.ac.in/images/campus-hero.jpg">
+
+<!-- Google Analytics 4 (school property G-FMDZW6PB7C).
+     linker.domains keeps the same client_id when the visitor moves to
+     apply.nimt.ac.in for the application flow — required for closed-loop
+     conversion attribution from ad click → admission. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMDZW6PB7C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', 'G-FMDZW6PB7C', {
+    linker: { domains: ['apply.nimt.ac.in', 'nimt.ac.in', 'miraischool.in'] }
+  });
+</script>
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"School","@id":"https://nimtschool.edu.in/#school","name":"NIMT School Ghaziabad","alternateName":"NIMT School","url":"https://nimtschool.edu.in/","logo":"https://nimtschool.edu.in/images/nimt_logo.jpg","image":"https://nimtschool.edu.in/images/campus-hero.jpg","description":"NIMT School is a leading CBSE affiliated boarding school in Shastri Nagar, Ghaziabad offering K-12 English-medium education with robotics labs, martial arts training, and holistic development.","address":{"@type":"PostalAddress","streetAddress":"Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar","addressLocality":"Ghaziabad","addressRegion":"Uttar Pradesh","postalCode":"201002","addressCountry":"IN"},"telephone":"+91 95999 31443","email":"nsae@nimt.ac.in","openingHours":"Mo-Sa 08:00-17:00","hasMap":"https://www.google.com/maps?q=Ansal+Avantika+Ext+Rd+Avantika+Colony+Shastri+Nagar+Ghaziabad+201002","foundingDate":"1999","numberOfStudents":2000},
-{"@type":"WebSite","@id":"https://nimtschool.edu.in/#website","url":"https://nimtschool.edu.in/","name":"NIMT School Ghaziabad","description":"Official website of NIMT School, Ghaziabad"},
+{"@type":"School","@id":"https://school.nimt.ac.in/#school","name":"NIMT School Ghaziabad","alternateName":"NIMT School","url":"https://school.nimt.ac.in/","logo":"https://school.nimt.ac.in/images/nimt_logo.jpg","image":"https://school.nimt.ac.in/images/campus-hero.jpg","description":"NIMT School is a leading CBSE affiliated boarding school in Shastri Nagar, Ghaziabad offering K-12 English-medium education with robotics labs, martial arts training, and holistic development.","address":{"@type":"PostalAddress","streetAddress":"Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar","addressLocality":"Ghaziabad","addressRegion":"Uttar Pradesh","postalCode":"201002","addressCountry":"IN"},"telephone":"+91 95999 31443","email":"nsae@nimt.ac.in","openingHours":"Mo-Sa 08:00-17:00","hasMap":"https://www.google.com/maps?q=Ansal+Avantika+Ext+Rd+Avantika+Colony+Shastri+Nagar+Ghaziabad+201002","foundingDate":"1999","numberOfStudents":2000},
+{"@type":"WebSite","@id":"https://school.nimt.ac.in/#website","url":"https://school.nimt.ac.in/","name":"NIMT School Ghaziabad","description":"Official website of NIMT School, Ghaziabad"},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Which board does NIMT School follow?","acceptedAnswer":{"@type":"Answer","text":"NIMT School is a CBSE affiliated school, providing a nationally recognised curriculum that prepares students thoroughly for board exams and competitive entrance tests."}},
 {"@type":"Question","name":"Does NIMT School have boarding facilities?","acceptedAnswer":{"@type":"Answer","text":"Yes, NIMT School offers Day School, Day Boarding, and Full Boarding with 24/7 supervision and a secure campus environment."}},
@@ -917,12 +932,86 @@ document.addEventListener('keydown', e => {
 
 
  
+// ─── GA4 attribution capture ──────────────────────────────────────────────────
+// Harvest GA client_id + UTM/gclid params to attach to UniOs lead-ingest. The
+// DB trigger in UniOs fires generate_lead server-side via Measurement Protocol,
+// so this is the only data the relay needs to attribute the conversion to the
+// right GA4 property and campaign. First-touch values persist to localStorage.
+function captureAttr(){
+  const STORAGE_KEY = 'nimtschool_attribution_v1';
+  const readCookie = (n) => {
+    const m = ('; ' + document.cookie).split('; ' + n + '=');
+    return m.length < 2 ? undefined : (m.pop() || '').split(';').shift() || undefined;
+  };
+  const parseGaClientId = () => {
+    const raw = readCookie('_ga'); if (!raw) return undefined;
+    const p = raw.split('.'); return p.length < 4 ? undefined : p[2] + '.' + p[3];
+  };
+  const parseGaSessionId = () => {
+    const raw = readCookie('_ga_FMDZW6PB7C');
+    return raw ? raw.split('.')[2] : undefined;
+  };
+  let stored = {};
+  try { stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(_) {}
+  const u = new URL(window.location.href);
+  const fresh = {
+    ga_client_id:  parseGaClientId(),
+    ga_session_id: parseGaSessionId(),
+    gclid:         u.searchParams.get('gclid')        || undefined,
+    utm_source:    u.searchParams.get('utm_source')   || undefined,
+    utm_medium:    u.searchParams.get('utm_medium')   || undefined,
+    utm_campaign:  u.searchParams.get('utm_campaign') || undefined,
+    utm_term:      u.searchParams.get('utm_term')     || undefined,
+    utm_content:   u.searchParams.get('utm_content')  || undefined,
+    landing_page:  stored.landing_page || (window.location.pathname + window.location.search),
+    referrer:      stored.referrer     || (document.referrer || undefined),
+    // Hardcoded so the relay routes to the school GA property regardless of
+    // whether the page is served on nimtschool.edu.in or school.nimt.ac.in
+    origin_domain: 'school.nimt.ac.in',
+  };
+  const merged = {};
+  Object.keys(fresh).forEach((k) => { merged[k] = fresh[k] || stored[k]; });
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(merged)); } catch(_) {}
+  return merged;
+}
+
+// Fire-and-forget UniOs lead-ingest. Runs in parallel with the web3forms
+// email post — failures here never block the user-facing form flow.
+function pushLeadToUniOs(d){
+  try {
+    const SB_URL = 'https://deylhigsisuexszsmypq.supabase.co';
+    const SB_KEY = 'sb_publishable_pgYgbNk-tiiQRN3Ll6wDiw_zg8zVHuO';
+    fetch(SB_URL + '/functions/v1/lead-ingest?source=website', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+      },
+      body: JSON.stringify({
+        name: d.s || d.p,
+        guardian_name: d.p,
+        phone: d.ph,
+        email: d.e || undefined,
+        course: d.cl ? 'Class ' + d.cl : undefined,
+        campus: 'NIMT School Ghaziabad',
+        message: d.msg || undefined,
+        ...captureAttr(),
+      }),
+    }).catch(() => {});
+  } catch(_) {}
+}
+
 // ─── Web3Forms submit ─────────────────────────────────────────────────────────
 async function submitEmail(event){
   if(event) event.preventDefault();
   const d = getFormData(); if(!d) return;
 
   setBtnLoading('email-btn', 'Submitting…');
+
+  // Push to UniOs CRM in parallel — gives us GA conversion attribution and
+  // a CRM record even if web3forms email delivery fails.
+  pushLeadToUniOs(d);
 
   const formEl = document.getElementById('admission-form-el');
   const formData = new FormData(formEl);
