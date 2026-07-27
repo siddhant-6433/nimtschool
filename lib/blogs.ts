@@ -171,7 +171,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: "blog-5",
-    slug: "/blogs/ghaziabad-ka-sabse-accha-boarding-school",
+    slug: "ghaziabad-ka-sabse-accha-boarding-school",
     title: "Boarding School vs Day School: गाज़ियाबाद का सबसे अच्छा बोर्डिंग स्कूल कैसे चुनें?",
     excerpt: "अगर आप अपने बच्चे के लिए गाज़ियाबाद का सबसे अच्छा बोर्डिंग स्कूल ढूंढ रहे हैं, तो यह फैसला केवल स्कूल की इमारत देखकर नहीं लेना चाहिए। एक अच्छा बोर्डिंग स्कूल वह होता है जहाँ बच्चे को अच्छी शिक्षा के साथ सुरक्षित वातावरण, अनुशासित जीवन, अच्छे संस्कार और अपने व्यक्तित्व को विकसित करने के अवसर मिलें।",
     category: "STEM",
@@ -204,7 +204,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: "blog-6",
-    slug: "/how-to-choose-the-right-school-for-your-child",
+    slug: "how-to-choose-the-right-school-for-your-child",
     title: "How to Choose the Right School for Your Child",
     excerpt: "Choosing the right school for your child is one of the biggest decisions you will make as a parent. A school is not just a place where children learn subjects like English, Mathematics, and Science.",
     category: "School Activities",
@@ -237,7 +237,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: "blog-7",
-    slug: "/is-boarding-school-good-for-children",
+    slug: "is-boarding-school-good-for-children",
     title: "Is Boarding School Good for Children? A Complete Guide for Parents",
     excerpt: "Many parents ask the same question before making an admission decision: Is boarding school good for children? The answer depends on the child's age, personality, interests, and family situation. ",
     category: "Mental Wellness",
@@ -270,7 +270,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     id: "blog-8",
-    slug: "/preschool-kyon-zaruri-hai",
+    slug: "preschool-kyon-zaruri-hai",
     title: "How to Improve Concentration While Studying",
     excerpt: "Practical study techniques that help students stay focused and learn faster.",
     category: "Study Tips",

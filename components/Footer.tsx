@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   Mail,
@@ -73,9 +74,12 @@ export default function Footer() {
             {/* Column 1: School Identity */}
             <div className="lg:col-span-2 space-y-6">
               <div id="footer-branding" className="flex items-center gap-3">
-                <img
+                <Image
                   src="/white-logo.webp"
                   alt="NIMT Beacon School"
+                  width={56}
+                  height={56}
+                  loading="lazy"
                   className="h-14 w-auto object-contain"
                 />
               </div>

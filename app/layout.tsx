@@ -42,6 +42,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
+        {/* Preconnect to third-party origins used on first paint */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
+        <link rel="preconnect" href="https://picsum.photos" crossOrigin="" />
+
         {/* 1. Google Tag Manager - Injected as high up in the <head> as possible */}
         <Script
           id="gtm-script"

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ChevronDown, Phone, Sparkles, ShieldCheck } from "lucide-react";
@@ -67,9 +68,12 @@ export default function Navbar() {
   href="/"
   className="group flex items-center"
 >
-  <img
+  <Image
     src="/nimt-beacon-logo.webp"
     alt="NIMT Beacon"
+    width={64}
+    height={64}
+    priority
     className="h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
   />
 </Link>

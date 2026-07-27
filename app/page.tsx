@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import InstagramReels from "@/components/InstagramReels";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Sparkles,
@@ -215,6 +217,30 @@ export default function Home() {
   // FAQ Accordion states
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // Defer loading the heavy hero background video until the browser is idle,
+  // so it doesn't compete for bandwidth with LCP on initial load. The poster
+  // image paints instantly; the video streams in afterwards.
+  const [heroVideoReady, setHeroVideoReady] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void) => number;
+    };
+    const start = () => setHeroVideoReady(true);
+    if (typeof w.requestIdleCallback === "function") {
+      w.requestIdleCallback(start);
+    } else {
+      const t = setTimeout(start, 1500);
+      return () => clearTimeout(t);
+    }
+  }, []);
+  // Once the <source> is injected, tell the video element to load & play it.
+  useEffect(() => {
+    if (heroVideoReady && heroVideoRef.current) {
+      heroVideoRef.current.load();
+    }
+  }, [heroVideoReady]);
+
   const faqs = [
     {
       question: "What is the admission procedure for the 2026-27 academic year?",
@@ -256,15 +282,27 @@ export default function Home() {
 >
 {/* Background Campus Video */}
 <div className="absolute inset-0 z-0 overflow-hidden">
+  {/* Optimized poster as the LCP element — served as a static asset with high
+      fetch priority so it paints instantly. The video is deferred and layered
+      on top, so it never delays LCP. */}
+  {/* eslint-disable-next-line @next/next/no-img-element */}
+  <img
+    src="/hero-poster.webp"
+    alt=""
+    fetchPriority="high"
+    decoding="async"
+    className="absolute inset-0 w-full h-full object-cover object-top"
+  />
   <video
+    ref={heroVideoRef}
     autoPlay
     muted
     loop
     playsInline
-    preload="auto"
-    className="w-full h-full object-cover object-top"
+    preload="none"
+    className="absolute inset-0 w-full h-full object-cover object-top"
   >
-    <source src="/campus-video.mp4" type="video/mp4" />
+    {heroVideoReady && <source src="/campus-video.min.mp4" type="video/mp4" />}
     Your browser does not support the video tag.
   </video>
 
@@ -276,9 +314,8 @@ export default function Home() {
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center py-20">
 
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 1, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0041f5] backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-widest uppercase mb-6"
     >
       <Sparkles className="w-4 h-4 text-[#fffc4d]" />
@@ -286,9 +323,8 @@ export default function Home() {
     </motion.div>
 
     <motion.h1
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 1, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
       className="text-4xl sm:text-6xl lg:text-7xl font-tailwind font-black tracking-tight leading-tight max-w-5xl mx-auto mb-8"
     >
       Where{" "}
@@ -300,9 +336,8 @@ export default function Home() {
     </motion.h1>
 
 <motion.p
-  initial={{ opacity: 0, y: 30 }}
+  initial={{ opacity: 1, y: 0 }}
   animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.4 }}
   className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-12"
 >
   <strong className="text-white">CBSE Affiliated</strong> |{" "}
@@ -366,11 +401,13 @@ export default function Home() {
                 className="group relative bg-slate-50 border border-slate-200/65 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300"
               >
                 <div className="aspect-square relative overflow-hidden">
-                  <img
+                  <Image
                     src={item.img}
                     alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    loading="lazy"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
         
                 </div>
@@ -452,11 +489,13 @@ export default function Home() {
                     className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-200/50"
                   >
                     <div className="h-[250px] sm:h-[350px] relative rounded-2xl overflow-hidden shadow-lg">
-                      <img
+                      <Image
                         src={stage.image}
                         alt={stage.title}
-                        className="w-full h-full object-cover"
-                        referrerPolicy="no-referrer"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        loading="lazy"
+                        className="object-cover"
                       />
                     </div>
                     <div className="space-y-6">
@@ -536,11 +575,13 @@ export default function Home() {
             </div>
 
             <div className="relative aspect-square w-full max-w-[500px] mx-auto rounded-3xl overflow-hidden shadow-2xl order-1 lg:order-2">
-              <img
+              <Image
                 src="/day-school-class.webp"
                 alt="Active primary day school class"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
+                fill
+                sizes="(max-width: 1024px) 100vw, 500px"
+                loading="lazy"
+                className="object-cover"
               />
               <div className="absolute top-4 right-4 bg-white/95 backdrop-blur px-4 py-2 rounded-full text-[10px] font-black uppercase text-[#0041f5] border border-blue-500/10 shadow">
                 Nursery to Class XII
@@ -555,11 +596,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-square w-full max-w-[500px] mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-              <img
+              <Image
                 src="/day-boarding.webp"
                 alt="Active sports period under day boarding"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
+                fill
+                sizes="(max-width: 1024px) 100vw, 500px"
+                loading="lazy"
+                className="object-cover"
               />
               <div className="absolute bottom-6 left-6 right-6 bg-slate-950/70 p-4 rounded-2xl backdrop-blur border border-white/10 text-center">
                 <p className="text-xs font-black text-[#fffc4d] uppercase tracking-widest">Ideal for Professional Dual-Working Parents</p>
@@ -672,11 +715,13 @@ This means parents can focus on their professional commitments with peace of min
             </div>
 
             <div className="relative h-[350px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
-              <img
+              <Image
                 src="/hostel.webp"
                 alt="Safe  hostel study lounge"
-                className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                loading="lazy"
+                className="object-cover"
               />
               <div className="absolute top-4 left-4 bg-[#8a5506] text-[#fffc4d] px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-[#fffc4d]/20">
                 Swiss-Standard Living
@@ -733,11 +778,13 @@ This means parents can focus on their professional commitments with peace of min
                   transition={{ duration: 0.3 }}
                   className="group relative h-72 rounded-2xl overflow-hidden shadow-md border border-slate-150-10 flex flex-col justify-end p-4"
                 >
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 z-0"
-                    referrerPolicy="no-referrer"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 z-0"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-transparent z-10" />
                   <div className="relative z-20">
@@ -850,16 +897,19 @@ This means parents can focus on their professional commitments with peace of min
       {[
         {
           video: "/videos/testimonial-1.mp4",
+          poster: "/testimonial-1.webp",
           author: "Parents of Vivan",
           designation: " Class 5th Student ",
         },
         {
           video: "/videos/testimonial-2.mp4",
+          poster: "/testimonial-2.webp",
           author: "Parent Of Kavyansh",
           designation: "Class 11th Student",
         },
         {
           video: "/videos/testimonial-3.mp4",
+          poster: "/testimonial-3.webp",
           author: "Parent Of Vani Kaushik",
           designation: "Class 5th Student",
         },
@@ -873,7 +923,8 @@ This means parents can focus on their professional commitments with peace of min
   src={item.video}
   controls
   playsInline
-  preload="metadata"
+  preload="none"
+  poster={item.poster}
   className="absolute inset-0 w-full h-full object-cover"
 />
 
@@ -900,6 +951,9 @@ This means parents can focus on their professional commitments with peace of min
     </div>
   </div>
 </section>
+
+      {/* SECTION: INSTAGRAM REELS */}
+      <InstagramReels />
 
 
       {/* SECTION 12: STUDENT SUCCESS STORIES */}
@@ -933,11 +987,13 @@ This means parents can focus on their professional commitments with peace of min
                 className="bg-slate-50 rounded-3xl overflow-hidden border border-slate-200/50 flex flex-col sm:flex-row shadow"
               >
                 <div className="w-full sm:w-1/2 h-56 sm:h-auto relative">
-                  <img
+                  <Image
                     src={story.image}
                     alt={story.student}
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                    loading="lazy"
+                    className="object-cover"
                   />
                 </div>
                 <div className="p-6 w-full sm:w-1/2 flex flex-col justify-between">
