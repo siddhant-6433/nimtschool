@@ -10,6 +10,10 @@
 
 [build]
   command = "npm run build"
+  # Explicit publish dir overrides a stale "repo root" value set in the Netlify
+  # UI. @netlify/plugin-nextjs rejects a publish dir equal to the base dir, so
+  # this must point at the Next build output (never "." / the repo root).
+  publish = ".next"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
