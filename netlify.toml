@@ -1,0 +1,26 @@
+# Netlify config for school.nimt.ac.in
+#
+# The main website is a Next.js app (built by @netlify/plugin-nextjs, which
+# provisions serverless functions for SSR + the /api/chat route).
+#
+# The pre-built Vite boarding landing page lives as static assets in
+# public/landing/boarding/ and is served verbatim at /landing/boarding/.
+# Kushal's Next.js source has no route for that path, so the static files
+# take precedence; the rewrite below covers the bare directory URL.
+
+[build]
+  command = "npm run build"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Serve the static landing SPA index for its directory URL.
+[[redirects]]
+  from = "/landing/boarding"
+  to = "/landing/boarding/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/landing/boarding/"
+  to = "/landing/boarding/index.html"
+  status = 200
