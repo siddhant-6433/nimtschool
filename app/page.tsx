@@ -329,18 +329,16 @@ export default function Home() {
   {/* Hero Content */}
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center py-20">
 
-    <motion.div
-      initial={{ opacity: 1, y: 0 }}
-      animate={{ opacity: 1, y: 0 }}
+    {/* Plain (non-motion) elements: this is the LCP region, so it must paint
+        at first paint and never wait for framer-motion to hydrate. */}
+    <div
       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0041f5] backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-widest uppercase mb-6"
     >
       <Sparkles className="w-4 h-4 text-[#fffc4d]" />
       Ghaziabad's No.1 Boarding & Day Boarding Institution
-    </motion.div>
+    </div>
 
-    <motion.h1
-      initial={{ opacity: 1, y: 0 }}
-      animate={{ opacity: 1, y: 0 }}
+    <h1
       className="text-4xl sm:text-6xl lg:text-7xl font-tailwind font-black tracking-tight leading-tight max-w-5xl mx-auto mb-8"
     >
       Where{" "}
@@ -349,11 +347,9 @@ export default function Home() {
       </span>
       <br className="hidden md:inline" />
       Begin Their Journey
-    </motion.h1>
+    </h1>
 
-<motion.p
-  initial={{ opacity: 1, y: 0 }}
-  animate={{ opacity: 1, y: 0 }}
+<p
   className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-12"
 >
   <strong className="text-white">CBSE Affiliated</strong> |{" "}
@@ -361,7 +357,7 @@ export default function Home() {
   <strong className="text-white">
     Day Boarding & Residential Boarding
   </strong>
-</motion.p>
+</p>
 
   </div>
 </section>
