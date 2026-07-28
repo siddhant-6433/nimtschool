@@ -49,16 +49,35 @@ export default function RootLayout({
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
         <link rel="preconnect" href="https://picsum.photos" crossOrigin="" />
 
-        {/* 1. Google Tag Manager - Injected as high up in the <head> as possible */}
+        {/* 1. Google Tag Manager — loaded LAZILY (on first interaction or after a
+            short idle fallback) instead of eagerly. GTM cascades into GA4, Google
+            Ads and the Meta Pixel (~600KB of JS); loading those during the initial
+            render saturates the main thread and pushes LCP out by ~1.8s. Deferring
+            them keeps the hero paint fast while analytics still fires within a few
+            seconds / as soon as the user engages. */}
         <Script
-          id="gtm-script"
+          id="gtm-lazy-loader"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              (function(w,d,s,l,i){
+                w[l]=w[l]||[];
+                var loaded=false;
+                var events=['scroll','mousemove','touchstart','click','keydown'];
+                function loadGTM(){
+                  if(loaded)return; loaded=true;
+                  events.forEach(function(e){w.removeEventListener(e,loadGTM);});
+                  w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+                  var f=d.getElementsByTagName(s)[0],
+                      j=d.createElement(s),
+                      dl=l!='dataLayer'?'&l='+l:'';
+                  j.async=true;
+                  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                  f.parentNode.insertBefore(j,f);
+                }
+                events.forEach(function(e){w.addEventListener(e,loadGTM,{passive:true,once:true});});
+                // Fallback so analytics still fires for users who never interact.
+                w.setTimeout(loadGTM,4000);
               })(window,document,'script','dataLayer','GTM-M9J8RJ7V');
             `,
           }}
