@@ -302,6 +302,8 @@ export default function Home() {
   {/* eslint-disable-next-line @next/next/no-img-element */}
   <img
     src="/hero-poster.webp"
+    srcSet="/hero-poster-sm.webp 768w, /hero-poster.webp 1280w"
+    sizes="100vw"
     alt=""
     fetchPriority="high"
     decoding="async"
@@ -419,7 +421,7 @@ export default function Home() {
                     src={item.img}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(min-width: 1024px) 25vw, 50vw"
                     loading="lazy"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -796,7 +798,7 @@ This means parents can focus on their professional commitments with peace of min
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     loading="lazy"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 z-0"
                   />
