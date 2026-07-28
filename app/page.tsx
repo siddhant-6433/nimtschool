@@ -217,15 +217,29 @@ export default function Home() {
   // FAQ Accordion states
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // Defer loading the heavy hero background video until the browser is idle,
-  // so it doesn't compete for bandwidth with LCP on initial load. The poster
-  // image paints instantly; the video streams in afterwards.
+  // Mobile-first: the hero background video is decorative, so we never ship it
+  // to phones, to users on a metered/slow connection, or to those who prefer
+  // reduced motion — they get the optimized poster image only. On larger
+  // screens we still defer the video until the browser is idle so it never
+  // competes with LCP.
   const [heroVideoReady, setHeroVideoReady] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const w = window as Window & {
       requestIdleCallback?: (cb: () => void) => number;
     };
+    const nav = navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    };
+    const isSmallScreen = window.matchMedia("(max-width: 767px)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const saveData = nav.connection?.saveData === true;
+    const slowNetwork = /(^|-)2g$/.test(nav.connection?.effectiveType || "");
+    if (isSmallScreen || prefersReducedMotion || saveData || slowNetwork) {
+      return; // poster-only experience
+    }
     const start = () => setHeroVideoReady(true);
     if (typeof w.requestIdleCallback === "function") {
       w.requestIdleCallback(start);
@@ -1022,7 +1036,7 @@ This means parents can focus on their professional commitments with peace of min
       </section> */}
 
       {/* SECTION 13: ADMISSIONS 2026 CONVERSION BLOCK */}
-      <section id="quick-admissions-form" className="py-24 bg-gradient-to-r from-slate-900 to-slate-950 text-white relative">
+      <section id="quick-admissions-form" className="py-24 bg-gradient-to-r from-slate-900 to-slate-950 text-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
         <div className="absolute top-1/4 left-10 w-96 h-96 rounded-full bg-blue-500/10 blur-[130px] pointer-events-none" />
 

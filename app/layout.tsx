@@ -10,7 +10,9 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
-  display: "swap",
+  // "optional" avoids a late font swap that would re-fire (and delay) the LCP
+  // on slow connections; the metric-matched fallback keeps CLS at zero.
+  display: "optional",
 });
 
 const jetbrainsMono = JetBrains_Mono({

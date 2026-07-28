@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* Mobile-first safety net: stray decorative/absolute elements must never cause
+   horizontal scrolling on small screens. `clip` (not `hidden`) avoids breaking
+   sticky/fixed positioning. */
+html {
+  overflow-x: clip;
+}
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
