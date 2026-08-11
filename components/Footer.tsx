@@ -259,17 +259,18 @@ export default function Footer() {
           </svg>
         </a>
 
-        <Link
+        <button
           id="floating-apply"
-          href="/admissions"
+          type="button"
+          onClick={openApply}
           className="hidden md:flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 text-xs font-bold px-4 py-2.5 rounded-full shadow-2xl transition-transform duration-300 hover:scale-105 active:scale-95 border border-amber-300"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
           </span>
-          Admissions 2026 Open
-        </Link>
+          Admissions 2027-28 Open
+        </button>
       </div>
 
       {/* POPUP MODAL FORM FOR FEE STRUCTURE DOWNLOAD */}
