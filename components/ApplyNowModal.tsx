@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, ArrowRight } from 'lucide-react';
+import { pushLeadToUniOs } from '@/lib/crm';
 
 interface ApplyNowModalProps {
   isOpen: boolean;
@@ -14,7 +15,7 @@ export default function ApplyNowModal({ isOpen, onClose }: ApplyNowModalProps) {
   const [form, setForm] = useState({
     childName: '',
     dob: '',
-    session: '2026-2027',
+    session: '2027-2028',
     grade: 'Grade I',
     lastSchool: '',
     parentName: '',
@@ -26,6 +27,24 @@ export default function ApplyNowModal({ isOpen, onClose }: ApplyNowModalProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Fire the CRM lead in parallel; never block the success UI on it.
+    pushLeadToUniOs({
+      studentName: form.childName,
+      guardianName: form.parentName,
+      phone: form.mobile,
+      email: form.email,
+      course: form.grade,
+      session: form.session,
+      message: [
+        form.lastSchool && `Last school: ${form.lastSchool}`,
+        form.parentOccupation && `Parent occupation: ${form.parentOccupation}`,
+        form.address && `Address: ${form.address}`,
+        form.dob && `DOB: ${form.dob}`,
+      ]
+        .filter(Boolean)
+        .join(' | ') || undefined,
+      source: 'apply-now-modal',
+    });
     setSubmitted(true);
   };
 
@@ -33,7 +52,7 @@ export default function ApplyNowModal({ isOpen, onClose }: ApplyNowModalProps) {
     setForm({
       childName: '',
       dob: '',
-      session: '2026-2027',
+      session: '2027-2028',
       grade: 'Grade I',
       lastSchool: '',
       parentName: '',
@@ -49,7 +68,7 @@ export default function ApplyNowModal({ isOpen, onClose }: ApplyNowModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/60 flex items-center justify-center p-4">
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -104,8 +123,8 @@ export default function ApplyNowModal({ isOpen, onClose }: ApplyNowModalProps) {
                         onChange={(e) => setForm({ ...form, session: e.target.value })}
                         className="w-full text-sm bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 focus:outline-none focus:border-[#0041F5]"
                       >
-                        <option>2026-2027</option>
                         <option>2027-2028</option>
+                        <option>2026-2027</option>
                       </select>
                     </div>
                     <div>

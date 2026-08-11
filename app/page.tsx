@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import InstagramReels from "@/components/InstagramReels";
+import { pushLeadToUniOs } from "@/lib/crm";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Sparkles,
@@ -66,6 +67,14 @@ export default function Home() {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.parentName && formData.studentName && formData.phone) {
+      pushLeadToUniOs({
+        studentName: formData.studentName,
+        guardianName: formData.parentName,
+        phone: formData.phone,
+        email: formData.email,
+        course: formData.targetClass,
+        source: "homepage-admissions-form",
+      });
       setFormSubmitted(true);
       setTimeout(() => {
         setFormSubmitted(false);

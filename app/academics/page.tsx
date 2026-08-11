@@ -29,6 +29,7 @@ import {
   ChevronRight,
   GraduationCap
 } from 'lucide-react';
+import { pushLeadToUniOs } from '@/lib/crm';
 
 // --- STYLES & CONFIGURATION ---
 const PRIMARY_COLOR = '#0041f5';
@@ -330,6 +331,14 @@ export default function AcademicsPage() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
+      void pushLeadToUniOs({
+        studentName,
+        guardianName: parentName,
+        phone: parentPhone,
+        email: parentEmail,
+        course: targetGrade,
+        source: 'academics-page-apply',
+      });
       setModalSuccess(true);
     }, 1200);
   };
@@ -339,6 +348,13 @@ export default function AcademicsPage() {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
+      void pushLeadToUniOs({
+        guardianName: parentName,
+        phone: parentPhone,
+        email: parentEmail,
+        message: `Campus visit request | Preferred date: ${visitDate} | Preferred time: ${visitTime}`,
+        source: 'academics-page-visit',
+      });
       setModalSuccess(true);
     }, 1200);
   };

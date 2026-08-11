@@ -49,6 +49,7 @@ import {
   Send
 } from 'lucide-react';
 import { IMAGES } from '@/lib/images';
+import { pushLeadToUniOs } from '@/lib/crm';
 
 // Global Scroll Utility
 const scrollToSection = (id: string, offset = 80) => {
@@ -274,6 +275,12 @@ function FeeDownloadModal({ isOpen, onClose, onDownloadSuccess }: FeeDownloadMod
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+
+      void pushLeadToUniOs({
+        guardianName: name,
+        phone: mobile,
+        source: 'admissions-download',
+      });
 
       // Clean form inputs, invoke parent metrics notification popup, close modal context
       setName('');
@@ -844,6 +851,15 @@ function EnquiryForm({ selectedProgram, onClearProgram }: EnquiryFormProps) {
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
+      void pushLeadToUniOs({
+        guardianName: parentName,
+        studentName,
+        phone: mobileNumber,
+        email,
+        course: grade,
+        program,
+        source: 'admissions-apply',
+      });
       setRefId('NIMT-2026-' + Math.floor(1000 + Math.random() * 9000));
       setShowSuccessModal(true);
     }, 1500);

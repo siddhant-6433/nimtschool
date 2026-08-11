@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { pushLeadToUniOs } from "@/lib/crm";
+import { useAdmissions } from "@/components/AdmissionsModal";
 import {
   Phone,
   Mail,
@@ -18,6 +20,7 @@ import {
 } from "lucide-react";
 
 export default function Footer() {
+  const { openApply } = useAdmissions();
   // Modal & Form States
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "" });
@@ -47,6 +50,14 @@ export default function Footer() {
       setError("Please enter a valid 10-digit mobile number.");
       return;
     }
+
+    // Capture the lead in the CRM (fee-structure download is a lead magnet).
+    pushLeadToUniOs({
+      guardianName: formData.name,
+      phone: formData.phone,
+      message: "Requested fee structure PDF download (footer)",
+      source: "footer-fee-download",
+    });
 
     // Trigger programmatic download of /fee.pdf
     const link = document.createElement("a");
@@ -86,6 +97,14 @@ export default function Footer() {
               <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
                 NIMT Beacon School is Ghaziabad&apos;s leading CBSE Day-Boarding and Residential institution. Established in 2001, we empower the future generation through academic depth, sports perfection, and leadership grit.
               </p>
+              <button
+                type="button"
+                onClick={openApply}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#fffc4d] text-slate-950 text-xs font-extrabold uppercase tracking-wider shadow-lg hover:bg-yellow-300 active:scale-95 transition-all"
+              >
+                Apply Now — Session 2027-28
+                <ArrowUpRight className="w-4 h-4" />
+              </button>
               <div className="flex items-center gap-4">
                 <a
                   href="https://www.facebook.com/nimtschoolgzb"

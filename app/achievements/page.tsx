@@ -35,6 +35,7 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { pushLeadToUniOs } from "@/lib/crm";
 
 // --- CUSTOM TYPES & INTERFACES ---
 
@@ -469,7 +470,17 @@ export default function AchievementsPage() {
     const bookings = JSON.parse(localStorage.getItem("nimt_bookings") || "[]");
     bookings.push({ ...bookingForm, id: Date.now().toString() });
     localStorage.setItem("nimt_bookings", JSON.stringify(bookings));
-    
+
+    void pushLeadToUniOs({
+      studentName: bookingForm.studentName,
+      guardianName: bookingForm.parentName,
+      phone: bookingForm.parentPhone,
+      email: bookingForm.parentEmail,
+      course: bookingForm.grade,
+      message: `Campus visit request | Preferred date: ${bookingForm.visitDate}`,
+      source: "achievements-page-visit",
+    });
+
     setSuccessMessage("Thank you! Your campus visit has been successfully booked. Our admission team will contact you shortly.");
     setIsBookingOpen(false);
     setBookingForm({
@@ -487,7 +498,17 @@ export default function AchievementsPage() {
     const applications = JSON.parse(localStorage.getItem("nimt_applications") || "[]");
     applications.push({ ...applyForm, id: Date.now().toString() });
     localStorage.setItem("nimt_applications", JSON.stringify(applications));
-    
+
+    void pushLeadToUniOs({
+      studentName: applyForm.studentName,
+      guardianName: applyForm.parentName,
+      phone: applyForm.parentPhone,
+      email: applyForm.parentEmail,
+      course: applyForm.grade,
+      message: `Previous school: ${applyForm.previousSchool}`,
+      source: "achievements-page-apply",
+    });
+
     setSuccessMessage("Application submitted successfully! Our admissions coordinator will review your request and call you within 24 hours.");
     setIsApplyOpen(false);
     setApplyForm({

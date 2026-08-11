@@ -6,11 +6,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ChevronDown, Phone, Sparkles, ShieldCheck } from "lucide-react";
+import AdmissionsBanner from "@/components/AdmissionsBanner";
+import { useAdmissions } from "@/components/AdmissionsModal";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const { openApply } = useAdmissions();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,10 +59,14 @@ export default function Navbar() {
     <>
       <header
         id="-header"
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#0041f5] border-b border-blue-400/30 ${
-          isScrolled ? "shadow-xl py-3" : "py-5"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       >
+        <AdmissionsBanner />
+        <div
+          className={`bg-[#0041f5] border-b border-blue-400/30 transition-all duration-500 ${
+            isScrolled ? "shadow-xl py-3" : "py-5"
+          }`}
+        >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo Left */}
@@ -145,10 +152,18 @@ export default function Navbar() {
     href="https://uni.nimt.ac.in/students"
     target="_blank"
     rel="noopener noreferrer"
-    className="relative overflow-hidden px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase bg-[#fffc4d] text-slate-950 shadow-lg hover:bg-yellow-400 active:scale-95 transition-all duration-300"
+    className="relative overflow-hidden px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase bg-white/10 text-white border border-white/25 hover:bg-white/20 active:scale-95 transition-all duration-300"
   >
     Parent Login
   </Link>
+  <button
+    id="cta-apply-now"
+    type="button"
+    onClick={openApply}
+    className="relative overflow-hidden px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase bg-[#fffc4d] text-slate-950 shadow-lg hover:bg-yellow-400 active:scale-95 transition-all duration-300"
+  >
+    Apply Now
+  </button>
 </div>
 
             {/* Mobile Menu Button */}
@@ -166,6 +181,7 @@ export default function Navbar() {
             </button>
           </div>
         </div>
+        </div>
       </header>
 
       {/* Mobile Menu Drawer */}
@@ -177,7 +193,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-x-0 top-[70px] z-40 lg:hidden bg-white dark:bg-slate-900 shadow-2xl border-b border-gray-100 dark:border-slate-800 overflow-y-auto max-h-[calc(100vh-80px)]"
+            className="fixed inset-x-0 top-[104px] z-40 lg:hidden bg-white dark:bg-slate-900 shadow-2xl border-b border-gray-100 dark:border-slate-800 overflow-y-auto max-h-[calc(100vh-104px)]"
           >
             <div className="px-5 pt-3 pb-8 space-y-4">
               {navLinks.map((link) => (
@@ -230,13 +246,16 @@ export default function Navbar() {
                 >
                   WhatsApp Admissions
                 </a>
-                <Link
-                  href="/admissions"
-                  onClick={() => setIsOpen(false)}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(false);
+                    openApply();
+                  }}
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#0041f5] hover:bg-blue-700 text-white font-semibold text-sm transition-all shadow-md shadow-blue-500/20"
                 >
-                  Apply For 2026-27
-                </Link>
+                  Apply Now — Session 2027-28
+                </button>
               </div>
             </div>
           </motion.div>

@@ -37,6 +37,7 @@ import {
   GraduationCap
 } from "lucide-react";
 import Image from "next/image";
+import { pushLeadToUniOs } from "@/lib/crm";
 
 // Types
 interface Facility {
@@ -363,6 +364,15 @@ export default function CampusFacilitiesPage() {
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (bookingData.parentName && bookingData.phone && bookingData.visitDate) {
+      void pushLeadToUniOs({
+        guardianName: bookingData.parentName,
+        studentName: bookingData.childName,
+        phone: bookingData.phone,
+        email: bookingData.email,
+        course: bookingData.childGrade,
+        message: `Campus visit request | Type: ${bookingData.visitType} | Date: ${bookingData.visitDate} | Time: ${bookingData.visitTime}`,
+        source: "campus-page",
+      });
       setBookingStep(3); // Go to Confirmation Ticket step
     }
   };

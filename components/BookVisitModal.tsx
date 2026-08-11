@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, Check } from 'lucide-react';
+import { pushLeadToUniOs } from '@/lib/crm';
 
 interface BookVisitModalProps {
   isOpen: boolean;
@@ -23,6 +24,21 @@ export default function BookVisitModal({ isOpen, onClose }: BookVisitModalProps)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    pushLeadToUniOs({
+      studentName: form.childName,
+      guardianName: form.parentName,
+      phone: form.mobile,
+      email: form.email,
+      course: form.grade,
+      message: [
+        'Campus visit request',
+        form.visitDate && `Preferred date: ${form.visitDate}`,
+        form.visitSlot && `Slot: ${form.visitSlot}`,
+      ]
+        .filter(Boolean)
+        .join(' | '),
+      source: 'book-visit-modal',
+    });
     setSubmitted(true);
   };
 
@@ -43,7 +59,7 @@ export default function BookVisitModal({ isOpen, onClose }: BookVisitModalProps)
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/60 flex items-center justify-center p-4">
           <motion.div 
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}

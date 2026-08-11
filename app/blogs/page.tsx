@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/blogs";
 import { cn } from "@/lib/utils";
+import { pushLeadToUniOs } from "@/lib/crm";
 
 export default function BlogsPage() {
   // Modals state
@@ -76,6 +77,14 @@ export default function BlogsPage() {
     setVisitLoading(true);
     setTimeout(() => {
       setVisitLoading(false);
+      void pushLeadToUniOs({
+        guardianName: visitForm.parentName,
+        phone: visitForm.phone,
+        email: visitForm.email,
+        course: visitForm.grade,
+        message: `Campus visit request | Preferred date: ${visitForm.visitDate}${visitForm.message ? ` | ${visitForm.message}` : ""}`,
+        source: "blogs-visit",
+      });
       setVisitSubmitted(true);
     }, 1500);
   };
@@ -87,6 +96,15 @@ export default function BlogsPage() {
     setApplyLoading(true);
     setTimeout(() => {
       setApplyLoading(false);
+      void pushLeadToUniOs({
+        studentName: applyForm.childName,
+        guardianName: applyForm.parentName,
+        phone: applyForm.phone,
+        email: applyForm.email,
+        course: applyForm.grade,
+        message: `${applyForm.prevSchool ? `Previous school: ${applyForm.prevSchool}` : ""}${applyForm.message ? ` | ${applyForm.message}` : ""}` || undefined,
+        source: "blogs-apply",
+      });
       setApplySubmitted(true);
     }, 1500);
   };

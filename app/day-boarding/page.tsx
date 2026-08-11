@@ -32,6 +32,7 @@ import {
   Map,
   Compass
 } from 'lucide-react';
+import { pushLeadToUniOs } from '@/lib/crm';
 
 // Curated high-quality, authentic Unsplash images of Indian school students and environments
 const IMAGES = {
@@ -178,6 +179,26 @@ export default function DayBoardingPage() {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    const nameInput = form.querySelector('input[type="text"]') as HTMLInputElement | null;
+    const phoneInput = form.querySelector('input[type="tel"]') as HTMLInputElement | null;
+    const emailInput = form.querySelector('input[type="email"]') as HTMLInputElement | null;
+    const gradeInput = form.querySelector('select') as HTMLSelectElement | null;
+    const dateInput = form.querySelector('input[type="date"]') as HTMLInputElement | null;
+    const isVisit = isVisitModalOpen;
+    void pushLeadToUniOs({
+      ...(isVisit
+        ? { guardianName: nameInput?.value }
+        : { studentName: nameInput?.value }),
+      phone: phoneInput?.value || '',
+      email: emailInput?.value || undefined,
+      course: gradeInput?.value || undefined,
+      program: 'Day Boarding',
+      message: dateInput?.value
+        ? `Preferred visit date: ${dateInput.value}`
+        : undefined,
+      source: isVisit ? 'day-boarding-page-visit' : 'day-boarding-page-apply',
+    });
     setFormSuccess(true);
     setTimeout(() => {
       setFormSuccess(false);

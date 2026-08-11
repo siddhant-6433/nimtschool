@@ -38,6 +38,7 @@ import {
   Menu,
   HeartHandshake
 } from 'lucide-react';
+import { pushLeadToUniOs } from '@/lib/crm';
 
 // ==========================================
 // STATIC DATA FOR HIGH-END DSLR IMAGES & INFO
@@ -352,6 +353,15 @@ export default function DaySchoolLandingPage() {
 
   const handleVisitSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    void pushLeadToUniOs({
+      guardianName: visitForm.name,
+      phone: visitForm.phone,
+      email: visitForm.email,
+      course: visitForm.grade,
+      program: 'Day School',
+      message: `Campus visit request | Preferred date: ${visitForm.date}`,
+      source: 'day-school-page-visit',
+    });
     setFormSuccessMessage(`Thank you, ${visitForm.name}! Your campus visit is scheduled for ${visitForm.date}. Our admissions officer will contact you shortly at ${visitForm.phone}.`);
     setVisitForm({ name: '', email: '', phone: '', grade: 'Grade I', date: '' });
     setTimeout(() => {
@@ -362,6 +372,16 @@ export default function DaySchoolLandingPage() {
 
   const handleApplySubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    void pushLeadToUniOs({
+      studentName: applyForm.studentName,
+      guardianName: applyForm.parentName,
+      phone: applyForm.phone,
+      email: applyForm.email,
+      course: applyForm.grade,
+      program: 'Day School',
+      message: `Previous school: ${applyForm.previousSchool}`,
+      source: 'day-school-page-apply',
+    });
     setFormSuccessMessage(`Application for ${applyForm.studentName} has been submitted successfully! An admission package and assessment details have been dispatched to ${applyForm.email}.`);
     setApplyForm({ studentName: '', parentName: '', email: '', phone: '', grade: 'Grade I', previousSchool: '' });
     setTimeout(() => {

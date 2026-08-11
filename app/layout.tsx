@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Script from "next/script"; // Imported for safe script injection
 
 import AdmissionsChatbot from "@/components/AdmissionsChatbot";
+import { AdmissionsProvider } from "@/components/AdmissionsModal";
 import "./globals.css";
 
 const inter = Inter({
@@ -95,12 +96,17 @@ export default function RootLayout({
           />
         </noscript>
 
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
-        <AdmissionsChatbot />
+        <AdmissionsProvider>
+          <Navbar />
+          {/* Offsets the extra height the announcement banner adds to the
+              fixed header, so page content padded for the old navbar height
+              still clears it. */}
+          <main className="flex-grow pt-9">
+            {children}
+          </main>
+          <Footer />
+          <AdmissionsChatbot />
+        </AdmissionsProvider>
       </body>
     </html>
   );

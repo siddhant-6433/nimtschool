@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { CheckCircle2, Send, Calendar, Award, BookOpen } from "lucide-react";
+import { pushLeadToUniOs } from "@/lib/crm";
 
 interface InquiryFormProps {
   pageTitle: string;
@@ -25,6 +26,17 @@ export default function InquiryForm({ pageTitle }: InquiryFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.parentName && formData.studentName && formData.phone) {
+      pushLeadToUniOs({
+        studentName: formData.studentName,
+        guardianName: formData.parentName,
+        phone: formData.phone,
+        email: formData.email,
+        course: formData.targetClass,
+        message: [`Enquiry from: ${pageTitle}`, formData.message]
+          .filter(Boolean)
+          .join(" | "),
+        source: "inquiry-form",
+      });
       setFormSubmitted(true);
       setTimeout(() => {
         setFormSubmitted(false);
