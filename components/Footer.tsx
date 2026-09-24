@@ -13,6 +13,7 @@ import {
   Linkedin,
   Facebook,
   Instagram,
+  Youtube,
   ArrowUpRight,
   ShieldCheck,
   X,
@@ -125,15 +126,15 @@ export default function Footer() {
                 >
                   <Instagram className="w-4 h-4" />
                 </a>
-                <a
-                  href="https://www.youtube.com/@nimtschool"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#0041f5] hover:bg-[#0041f5]/15 transition-all"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
+          <a
+  href="https://www.youtube.com/@nimtschool"
+  target="_blank"
+  rel="noreferrer"
+  className="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#0041f5] hover:bg-[#0041f5]/15 transition-all"
+  aria-label="YouTube"
+>
+  <Youtube className="w-4 h-4" />
+</a>
               </div>
             </div>
 
