@@ -75,7 +75,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer id="mega-footer" className="relative bg-slate-950 text-white overflow-hidden pt-20 pb-12 border-t border-slate-900">
+      <footer id="mega-footer" className="relative bg-slate-950 text-white overflow-hidden pt-20 pb-12 border-t border-slate-900 font-sans">
         {/* Background elements */}
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
         <div className="absolute top-1/4 -left-20 w-96 h-96 rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
@@ -95,104 +95,103 @@ export default function Footer() {
                   className="h-14 w-auto object-contain"
                 />
               </div>
-              <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
+              <p className="text-sm text-slate-400 max-w-sm leading-relaxed font-sans">
                 NIMT Beacon School is Ghaziabad&apos;s leading CBSE Day-Boarding and Residential institution. Established in 2001, we empower the future generation through academic depth, sports perfection, and leadership grit.
               </p>
               <button
                 type="button"
                 onClick={openApply}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#fffc4d] text-slate-950 text-xs font-extrabold uppercase tracking-wider shadow-lg hover:bg-yellow-300 active:scale-95 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#fffc4d] text-slate-950 text-xs font-black uppercase tracking-wider shadow-lg hover:bg-yellow-300 active:scale-95 transition-all font-sans cursor-pointer"
               >
                 Apply Now — Session 2027-28
                 <ArrowUpRight className="w-4 h-4" />
               </button>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 pt-2">
                 <a
                   href="https://www.facebook.com/nimtschoolgzb"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#0041f5] hover:bg-[#0041f5]/15 transition-all"
+                  className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#0041f5] hover:bg-[#0041f5]/15 transition-all duration-200 hover:-translate-y-0.5"
                   aria-label="Facebook"
                 >
                   <Facebook className="w-4 h-4" />
                 </a>
-            
+
                 <a
                   href="https://www.instagram.com/nimtschool"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#0041f5] hover:bg-[#0041f5]/15 transition-all"
+                  className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#0041f5] hover:bg-[#0041f5]/15 transition-all duration-200 hover:-translate-y-0.5"
                   aria-label="Instagram"
                 >
                   <Instagram className="w-4 h-4" />
                 </a>
-          <a
-  href="https://www.youtube.com/@nimtschool"
-  target="_blank"
-  rel="noreferrer"
-  className="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#0041f5] hover:bg-[#0041f5]/15 transition-all"
-  aria-label="YouTube"
->
-  <Youtube className="w-4 h-4" />
-</a>
+                <a
+                  href="https://www.youtube.com/@nimtschool"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#0041f5] hover:bg-[#0041f5]/15 transition-all duration-200 hover:-translate-y-0.5"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="w-4 h-4" />
+                </a>
               </div>
             </div>
 
             {/* Column 2: Academics & Day Programs */}
             <div>
-              <h4 className="font-serif font-bold text-sm tracking-widest uppercase text-[#fffc4d] mb-6">Academics</h4>
-              <ul className="space-y-4 text-sm text-slate-400">
+              <h4 className="font-sans font-extrabold text-xs tracking-widest uppercase text-[#fffc4d] mb-6">Academics</h4>
+              <ul className="space-y-3.5 text-sm text-slate-400 font-sans">
                 <li>
-                  <Link href="/day-school" className="hover:text-white transition-colors flex items-center gap-1 group">
+                  <Link href="/day-school" className="hover:text-white transition-colors flex items-center justify-between group">
                     <span>Day School Program</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all text-blue-500" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-blue-500" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/day-boarding" className="hover:text-white transition-colors flex items-center gap-1 group">
+                  <Link href="/day-boarding" className="hover:text-white transition-colors flex items-center justify-between group">
                     <span>Day Boarding Program</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all text-blue-500" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-blue-500" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/full-boarding" className="hover:text-white transition-colors flex items-center gap-1 group">
+                  <Link href="/full-boarding" className="hover:text-white transition-colors flex items-center justify-between group">
                     <span>Residential Boarding</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all text-blue-500" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-blue-500" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/academics" className="hover:text-white transition-colors flex items-center gap-1 group">
+                  <Link href="/academics" className="hover:text-white transition-colors flex items-center justify-between group">
                     <span>Senior Secondary Streams</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all text-blue-500" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-blue-500" />
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Column 3: Campus & Facilities */}
+            {/* Column 3: Useful Links */}
             <div>
-              <h4 className="font-serif font-bold text-sm tracking-widest uppercase text-[#fffc4d] mb-6">Useful Links</h4>
-              <ul className="space-y-4 text-sm text-slate-400">
+              <h4 className="font-sans font-extrabold text-xs tracking-widest uppercase text-[#fffc4d] mb-6">Useful Links</h4>
+              <ul className="space-y-3.5 text-sm text-slate-400 font-sans">
                 <li>
-                  <Link href="/mandatory-public-disclosure" className="hover:text-white transition-colors flex items-center gap-1 group">
+                  <Link href="/mandatory-public-disclosure" className="hover:text-white transition-colors flex items-center justify-between group">
                     <span>Mandatory Public Disclosures</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all text-blue-500" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-blue-500" />
                   </Link>
                 </li>
                 <li>
-                  <Link href="/blogs" className="hover:text-white transition-colors flex items-center gap-1 group">
+                  <Link href="/blogs" className="hover:text-white transition-colors flex items-center justify-between group">
                     <span>Blogs</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all text-blue-500" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-blue-500" />
                   </Link>
                 </li>
                 <li>
-                  {/* Changed from Link to button for custom form triggering */}
                   <button 
                     onClick={() => setIsModalOpen(true)}
-                    className="hover:text-white transition-colors flex items-center gap-1 group text-left cursor-pointer"
+                    className="hover:text-white transition-colors flex items-center justify-between w-full group text-left cursor-pointer"
                   >
                     <span>Download Fee Structure</span>
-                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all text-blue-500" />
+                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-blue-500" />
                   </button>
                 </li>
               </ul>
@@ -200,22 +199,22 @@ export default function Footer() {
 
             {/* Column 4: Contact & Locations */}
             <div>
-              <h4 className="font-serif font-bold text-sm tracking-widest uppercase text-[#fffc4d] mb-6">Contact Us</h4>
-              <ul className="space-y-4 text-sm text-slate-400">
-                <li className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#0041f5] shrink-0 mt-0.5" />
-                  <span className="leading-tight">Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar, Ghaziabad, Uttar Pradesh 201002</span>
+              <h4 className="font-sans font-extrabold text-xs tracking-widest uppercase text-[#fffc4d] mb-6">Contact Us</h4>
+              <ul className="space-y-4 text-sm text-slate-400 font-sans">
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-4 h-4 text-[#0041f5] shrink-0 mt-1" />
+                  <span className="leading-snug">Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar, Ghaziabad, Uttar Pradesh 201002</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Phone className="w-4 h-4 text-[#0041f5]" />
+                <li className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 text-[#0041f5] shrink-0" />
                   <span>+91 95999 31443</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Mail className="w-4 h-4 text-[#0041f5]" />
+                <li className="flex items-center gap-3">
+                  <Mail className="w-4 h-4 text-[#0041f5] shrink-0" />
                   <span>nsae@nimt.ac.in</span>
                 </li>
-                <li className="flex items-center gap-2.5">
-                  <Clock className="w-4 h-4 text-[#0041f5]" />
+                <li className="flex items-center gap-3">
+                  <Clock className="w-4 h-4 text-[#0041f5] shrink-0" />
                   <span>Mon - Sat: 8:00 AM - 4:00 PM</span>
                 </li>
               </ul>
@@ -223,11 +222,11 @@ export default function Footer() {
           </div>
 
           {/* Underlay bottom bar */}
-          <div className="border-t border-slate-900 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+          <div className="border-t border-slate-900/80 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 gap-4 font-sans">
             <p>© 2026 NIMT Beacon School. Ghaziabad, UP, India. All Rights Reserved.</p>
-            <div className="flex items-center gap-6">
+            <div className="flex flex-wrap items-center gap-6">
               <Link href="/admissions" className="hover:text-white transition-colors">Admission Guidelines</Link>
-              <span className="text-slate-650 flex items-center gap-1">
+              <span className="text-slate-600 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-blue-500" />
                 Affiliated with CBSE (Affiliation No: 2131310)
               </span>
@@ -237,11 +236,11 @@ export default function Footer() {
       </footer>
 
       {/* Persistent Floating Actions */}
-      <div id="floating-actions-dock" className="fixed bottom-6 left-6 z-50 flex flex-col gap-3">
+      <div id="floating-actions-dock" className="fixed bottom-6 left-6 z-50 flex flex-col gap-3 font-sans">
         <a
           id="floating-call"
           href="tel:+919599931443"
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-[#0041f5] hover:bg-blue-700 text-white shadow-2xl transition-transform duration-300 hover:scale-110 active:scale-95 border border-white/20"
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-[#0041f5] hover:bg-blue-700 text-white shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 border border-white/10"
           title="Call School Admissions"
         >
           <Phone className="w-5 h-5 fill-current" />
@@ -252,7 +251,7 @@ export default function Footer() {
           href="https://wa.me/919599931443?text=Hello%20NIMT%20Beacon%20School%20Admissions"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-2xl transition-transform duration-300 hover:scale-110 active:scale-95"
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
           title="WhatsApp Us"
         >
           <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -264,7 +263,7 @@ export default function Footer() {
           id="floating-apply"
           type="button"
           onClick={openApply}
-          className="hidden md:flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 text-xs font-bold px-4 py-2.5 rounded-full shadow-2xl transition-transform duration-300 hover:scale-105 active:scale-95 border border-amber-300"
+          className="hidden md:flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 text-xs font-bold px-4 py-2.5 rounded-full shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 border border-amber-300 cursor-pointer"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
@@ -276,13 +275,13 @@ export default function Footer() {
 
       {/* POPUP MODAL FORM FOR FEE STRUCTURE DOWNLOAD */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-md p-6 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in font-sans">
+          <div className="relative w-full max-w-md p-6 bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl text-white">
             
             {/* Close Button */}
             <button
               onClick={() => { setIsModalOpen(false); setError(""); }}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors"
+              className="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors p-1 rounded-full hover:bg-slate-800"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -290,10 +289,10 @@ export default function Footer() {
 
             {/* Header */}
             <div className="mb-6">
-              <h3 className="text-xl font-serif font-bold text-amber-400 flex items-center gap-2">
+              <h3 className="text-xl font-bold text-amber-400 flex items-center gap-2 font-sans">
                 <Download className="w-5 h-5 text-blue-500" /> Download Fee Structure
               </h3>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 mt-1.5 leading-relaxed font-sans">
                 Please provide your details below to instantly unlock and save the fee blueprint.
               </p>
             </div>
@@ -302,7 +301,7 @@ export default function Footer() {
             <form onSubmit={handleFormSubmit} className="space-y-4">
               {/* Name Field */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                   Full Name
                 </label>
                 <input
@@ -311,18 +310,18 @@ export default function Footer() {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Enter full name"
-                  className="w-full px-3 py-2 text-sm bg-slate-950 border border-slate-800 rounded-lg text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 text-sm bg-slate-950 border border-slate-800 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
                   required
                 />
               </div>
 
               {/* Mobile Number Field */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                   Mobile Number
                 </label>
-                <div className="flex rounded-lg overflow-hidden border border-slate-800 bg-slate-950 focus-within:border-blue-500 transition-colors">
-                  <span className="flex items-center justify-center px-3 text-sm bg-slate-900 border-r border-slate-800 text-slate-400 font-medium select-none">
+                <div className="flex rounded-xl overflow-hidden border border-slate-800 bg-slate-950 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-all">
+                  <span className="flex items-center justify-center px-3.5 text-sm bg-slate-900 border-r border-slate-800 text-slate-400 font-semibold select-none">
                     +91
                   </span>
                   <input
@@ -331,7 +330,7 @@ export default function Footer() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="9876543210"
-                    className="w-full px-3 py-2 text-sm bg-transparent text-white placeholder-slate-600 focus:outline-none"
+                    className="w-full px-3.5 py-2.5 text-sm bg-transparent text-white placeholder-slate-600 focus:outline-none"
                     required
                   />
                 </div>
@@ -340,7 +339,7 @@ export default function Footer() {
 
               {/* Error Box */}
               {error && (
-                <div className="text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 p-2.5 rounded-lg">
+                <div className="text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 p-2.5 rounded-xl">
                   {error}
                 </div>
               )}
@@ -348,7 +347,7 @@ export default function Footer() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-2.5 mt-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-sm rounded-lg shadow-lg transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3 mt-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm rounded-xl shadow-lg transition-all transform active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
               >
                 Access & Download PDF
               </button>

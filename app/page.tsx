@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import ParentsCorner from "@/components/ParentsCorner";
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -299,57 +300,53 @@ export default function Home() {
   return (
     <div id="school-homepage">
       {/* SECTION 1: HERO SECTION */}
-  <section
+<section
   id="cinematic-hero"
-  className="relative min-h-screen flex items-center justify-center overflow-hidden text-white pt-24"
+  className="relative min-h-screen flex items-center justify-center overflow-hidden text-white pt-24 font-sans"
 >
-{/* Background Campus Video */}
-<div className="absolute inset-0 z-0 overflow-hidden">
-  {/* Optimized poster as the LCP element — served as a static asset with high
-      fetch priority so it paints instantly. The video is deferred and layered
-      on top, so it never delays LCP. */}
-  {/* eslint-disable-next-line @next/next/no-img-element */}
-  <img
-    src="/hero-poster.webp"
-    srcSet="/hero-poster-sm.webp 768w, /hero-poster.webp 1280w"
-    sizes="100vw"
-    alt=""
-    fetchPriority="high"
-    decoding="async"
-    className="absolute inset-0 w-full h-full object-cover object-top"
-  />
-  <video
-    ref={heroVideoRef}
-    autoPlay
-    muted
-    loop
-    playsInline
-    preload="none"
-    className="absolute inset-0 w-full h-full object-cover object-top"
-  >
-    {heroVideoReady && <source src="/campus-video.min.mp4" type="video/mp4" />}
-    Your browser does not support the video tag.
-  </video>
+  {/* Background Campus Video */}
+  <div className="absolute inset-0 z-0 overflow-hidden">
+    {/* Optimized poster as the LCP element — served as a static asset with high
+        fetch priority so it paints instantly. The video is deferred and layered
+        on top, so it never delays LCP. */}
+    {/* eslint-disable-next-line @next/next/no-img-element */}
+    <img
+      src="/hero-poster.webp"
+      srcSet="/hero-poster-sm.webp 768w, /hero-poster.webp 1280w"
+      sizes="100vw"
+      alt="NIMT Beacon Campus"
+      fetchPriority="high"
+      decoding="async"
+      className="absolute inset-0 w-full h-full object-cover object-top"
+    />
+    <video
+      ref={heroVideoRef}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="none"
+      className="absolute inset-0 w-full h-full object-cover object-top"
+    >
+      {heroVideoReady && <source src="/campus-video.min.mp4" type="video/mp4" />}
+      Your browser does not support the video tag.
+    </video>
 
-  {/* Very light overlay only */}
-  <div className="absolute inset-0 bg-[#0041f5]/25" />
-</div>
+    {/* Refined Overlays for Ultimate Text Contrast */}
+    <div className="absolute inset-0 bg-[#0041f5]/30" />
+    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/40" />
+  </div>
 
   {/* Hero Content */}
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center py-20">
-
     {/* Plain (non-motion) elements: this is the LCP region, so it must paint
         at first paint and never wait for framer-motion to hydrate. */}
-    <div
-      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0041f5] backdrop-blur-md border border-white/20 text-white text-xs font-semibold tracking-widest uppercase mb-6"
-    >
-      <Sparkles className="w-4 h-4 text-[#fffc4d]" />
+    <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0041f5]/90 backdrop-blur-md border border-white/25 text-white text-xs sm:text-sm font-semibold tracking-widest uppercase mb-6 shadow-xl">
+      <Sparkles className="w-4 h-4 text-[#fffc4d] animate-pulse" />
       Ghaziabad's No.1 Boarding & Day Boarding Institution
     </div>
 
-    <h1
-      className="text-4xl sm:text-6xl lg:text-7xl font-tailwind font-black tracking-tight leading-tight max-w-5xl mx-auto mb-8"
-    >
+    <h1 className="text-4xl sm:text-6xl lg:text-7xl font-sans font-extrabold tracking-tight leading-[1.15] max-w-5xl mx-auto mb-8 drop-shadow-md">
       Where{" "}
       <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-300 to-[#fffc4d]">
         Future Leaders
@@ -358,399 +355,569 @@ export default function Home() {
       Begin Their Journey
     </h1>
 
-<p
-  className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-12"
->
-  <strong className="text-white">CBSE Affiliated</strong> |{" "}
-  <strong className="text-white">Nursery to Class XII</strong> |{" "}
-  <strong className="text-white">
-    Day Boarding & Residential Boarding
-  </strong>
-</p>
-
+    <p className="text-base sm:text-xl text-blue-100 max-w-3xl mx-auto mb-12 font-medium">
+      <strong className="text-white font-semibold">CBSE Affiliated</strong>{" "}
+      <span className="text-blue-300/60 mx-2">•</span>{" "}
+      <strong className="text-white font-semibold">Nursery to Class XII</strong>{" "}
+      <span className="text-blue-300/60 mx-2">•</span>{" "}
+      <strong className="text-white font-semibold">
+        Day Boarding & Residential Boarding
+      </strong>
+    </p>
   </div>
 </section>
       {/* SECTION 2: WHY PARENTS CHOOSE NIMT */}
-      <section id="why-choose-us" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">The NIMT Edge</span>
-            <h2 className="text-3xl md:text-5xl font-tailwind font-extrabold tracking-tight text-slate-950 mt-2">
-              Why Parents Choose NIMT Beacon School
-            </h2>
-            <div className="w-16 h-1 bg-[#0041f5] mx-auto mt-4" />
-          </div>
+  <section id="why-choose-us" className="py-24 bg-slate-50 font-sans relative overflow-hidden">
+  {/* Ambient Decorative Background Glow */}
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {[
-  {
-    title: "Strong CBSE Academics",
-    img: "/cbse.webp",
-  },
-  {
-    title: "Safe & Comfortable Boarding",
-    img: "/hostel.webp",
-  },
-  {
-    title: "IIT & JEE Preparation",
-    img: "/iit.webp",
-  },
-  {
-    title: "Smart Digital Classrooms",
-    img: "/smart-classroom.webp",
-  },
-  {
-    title: "Robotics & AI Labs",
-    img: "/Robotics.webp",
-  },
-  {
-    title: "Indoor Shooting Facility",
-    img: "/Indoor.webp",
-  },
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    {/* Section Header */}
+    <div className="text-center max-w-3xl mx-auto mb-16">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-[#0041f5] text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+        <span className="w-2 h-2 rounded-full bg-[#0041f5] animate-pulse" />
+        The NIMT Edge
+      </div>
 
-  {
-    title: "Leadership Development",
-    img: "/Leadership.webp",
-  },
-  {
-    title: "Student Well-Being & Care",
-    img: "/Care.webp",
-  },
-].map((item, idx) => (
-              <div
-                key={idx}
-                className="group relative bg-slate-50 border border-slate-200/65 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="aspect-square relative overflow-hidden">
-                  <Image
-                    src={item.img}
-                    alt={item.title}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, 50vw"
-                    loading="lazy"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-        
-                </div>
-                <div className="p-6">
-                  <h3 className="font-tailwind font-black text-lg text-slate-900 mb-2 group-hover:text-[#0041f5] transition-colors">
-                    {item.title}
-                  </h3>
-          
-                </div>
-              </div>
-            ))}
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-extrabold tracking-tight text-slate-950 leading-tight">
+        Why Parents Choose <br className="hidden sm:inline" />
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0041f5] to-blue-700">
+          NIMT Beacon School
+        </span>
+      </h2>
+
+      <p className="mt-4 text-slate-600 text-base md:text-lg font-normal max-w-2xl mx-auto">
+        Empowering students with academic excellence, leadership skills, and world-class facilities in a nurturing environment.
+      </p>
+    </div>
+
+    {/* Feature Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[
+        { title: "Strong CBSE Academics", img: "/cbse.webp" },
+        { title: "Safe & Comfortable Boarding", img: "/hostel.webp" },
+        { title: "IIT & JEE Preparation", img: "/iit.webp" },
+        { title: "Smart Digital Classrooms", img: "/smart-classroom.webp" },
+        { title: "Robotics & AI Labs", img: "/Robotics.webp" },
+        { title: "Indoor Shooting Facility", img: "/Indoor.webp" },
+        { title: "Leadership Development", img: "/Leadership.webp" },
+        { title: "Student Well-Being & Care", img: "/Care.webp" },
+      ].map((item, idx) => (
+        <div
+          key={idx}
+          className="group relative bg-white rounded-3xl overflow-hidden border border-slate-200/80 hover:border-[#0041f5]/40 shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
+        >
+          {/* Image & Gradient Container */}
+          <div className="aspect-[4/3] sm:aspect-[1/1] relative overflow-hidden bg-slate-100">
+            <Image
+              src={item.img}
+              alt={item.title}
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              loading="lazy"
+              className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+            />
+
+            {/* Gradient Dark Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+
+            {/* Top Index Badge */}
+            <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold tracking-wider">
+              {(idx + 1).toString().padStart(2, "0")}
+            </div>
+
+            {/* Overlay Text Content */}
+            <div className="absolute bottom-5 left-5 right-5 z-10">
+              <h3 className="font-sans font-bold text-lg text-white leading-snug group-hover:text-yellow-300 transition-colors">
+                {item.title}
+              </h3>
+            </div>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* SECTION 3: NIMT IN NUMBERS */}
-      <section id="academic-stats" className="py-20 bg-[#0041f5] text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-white/5 blur-3xl pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
-            {[
-              { num: "25+", label: "Years of Educational Excellence" },
-              { num: "2000+", label: "Nurtured Global Scholars" },
-              { num: "98%", label: "Verified Parent Satisfaction Rate" },
-              { num: "100+", label: "Top National & Global Uni Placements" },
-              { num: "85%+", label: "Consistent Class XII First Division Outcomes" },
-            ].map((stat, idx) => (
-              <div key={idx} className="p-4 pt-8 md:pt-4">
-                <p className="text-4xl md:text-5xl font-mono font-black text-[#fffc4d] tracking-tight">{stat.num}</p>
-                <div className="w-8 h-0.5 bg-sky-200 mx-auto my-3" />
-                <p className="text-xs uppercase tracking-wider text-sky-100 font-semibold">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+  <section id="academic-stats" className="py-20 bg-[#0041f5] text-white overflow-hidden relative font-sans">
+  {/* Ambient Decorative Background Glows */}
+  <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+  <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-yellow-400/10 blur-3xl pointer-events-none" />
+
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
+      {[
+        { num: "25+", label: "Years of Educational Excellence" },
+        { num: "2000+", label: "Nurtured Global Scholars" },
+        { num: "98%", label: "Verified Parent Satisfaction Rate" },
+        { num: "100+", label: "Top National & Global Uni Placements" },
+        { num: "85%+", label: "Consistent Class XII First Division Outcomes" },
+      ].map((stat, idx) => (
+        <div
+          key={idx}
+          className={`group bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 hover:border-white/30 rounded-3xl p-6 text-center shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center justify-center ${
+            idx === 4 ? "col-span-2 lg:col-span-1" : "col-span-1"
+          }`}
+        >
+          {/* Stat Number */}
+          <p className="text-4xl sm:text-5xl font-sans font-black text-[#fffc4d] tracking-tight leading-none mb-3 group-hover:scale-105 transition-transform duration-300">
+            {stat.num}
+          </p>
+
+          {/* Accent Line */}
+          <div className="w-8 h-0.5 bg-sky-200/50 rounded-full mb-3 group-hover:w-14 group-hover:bg-[#fffc4d] transition-all duration-300" />
+
+          {/* Label */}
+          <p className="text-xs sm:text-sm font-semibold text-blue-100 uppercase tracking-wider leading-snug">
+            {stat.label}
+          </p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* SECTION 4: CURRICULUM TIMELINE */}
-      <section id="academic-journey" className="py-24 bg-[#f6eada]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">The Scholastic Timeline</span>
-            <h2 className="text-3xl md:text-5xl font-tailwind font-extrabold tracking-tight text-slate-900 mt-2">
-              Our Multi-Stage Academic Journey
-            </h2>
-            <p className="text-sm text-slate-550 max-w-lg mx-auto mt-3">
-              Explore how NIMT shapes character and unlocks peak capacity from infant daycare up to competitive Class XII.
-            </p>
-          </div>
+  <section id="academic-journey" className="py-24 bg-gradient-to-b from-slate-50 via-blue-50/30 to-slate-50 relative overflow-hidden font-sans">
+  {/* Ambient Background Glows */}
+  <div className="absolute top-1/3 left-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
+  <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Timeline Switch Controls */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12 border-b border-slate-300 pb-6">
-            {timelineStages.map((stage) => (
-              <button
-                key={stage.id}
-                onClick={() => setActiveTimelineStage(stage.id)}
-                className={`px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-extrabold transition-all duration-300 ${
-                  activeTimelineStage === stage.id
-                    ? "bg-[#0041f5] text-white shadow-lg"
-                    : "bg-white text-slate-700 hover:bg-[#0041f5]/10 border border-slate-200"
-                }`}
-              >
-                {stage.title}
-              </button>
-            ))}
-          </div>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    {/* Section Header */}
+    <div className="text-center max-w-3xl mx-auto mb-14">
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-[#0041f5] text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+        <span className="w-2 h-2 rounded-full bg-[#0041f5] animate-pulse" />
+        The Scholastic Timeline
+      </div>
 
-          {/* Active timeline block */}
-          <AnimatePresence mode="wait">
-            {timelineStages.map(
-              (stage) =>
-                activeTimelineStage === stage.id && (
-                  <motion.div
-                    key={stage.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-200/50"
-                  >
-                    <div className="h-[250px] sm:h-[350px] relative rounded-2xl overflow-hidden shadow-lg">
-                      <Image
-                        src={stage.image}
-                        alt={stage.title}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        loading="lazy"
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="space-y-6">
-                      <span className="text-xs font-bold text-[#8a5506] bg-[#8a5506]/10 px-3 py-1.5 rounded-full">
-                        {stage.subtitle}
-                      </span>
-                      <h3 className="font-tailwind font-black text-2xl sm:text-3xl text-slate-950">{stage.title}</h3>
-                      <p className="text-sm text-slate-600 leading-relaxed font-sans">{stage.description}</p>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-extrabold tracking-tight text-slate-950 leading-tight">
+        Our Multi-Stage <br className="hidden sm:inline" />
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0041f5] to-blue-700">
+          Academic Journey
+        </span>
+      </h2>
 
-                      <div className="space-y-3 pt-2">
-                        <p className="text-xs font-black uppercase text-slate-400 tracking-wider">Curriculum Highlights</p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                          {stage.highlights.map((hlt, i) => (
-                            <div key={i} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                              <span>{hlt}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+      <p className="text-base text-slate-600 max-w-xl mx-auto mt-4 font-normal leading-relaxed">
+        Explore how NIMT shapes character and unlocks peak academic potential from early childhood development up to competitive Class XII board prep.
+      </p>
+    </div>
 
-                      <div className="pt-4 border-t border-slate-100 flex items-center gap-4">
-                        <Link
-                          href={stage.link}
-                          className="px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#0041f5] text-white hover:bg-blue-600 transition-all flex items-center gap-1 shadow-md shadow-blue-500/10"
-                        >
-                          Explore Program Details
-                          <ChevronRight className="w-4 h-4" />
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                )
-            )}
-          </AnimatePresence>
-        </div>
-      </section>
+    {/* Timeline Switch Controls */}
+    <div className="flex flex-wrap justify-center gap-2.5 mb-12 p-2 bg-slate-200/50 backdrop-blur-md rounded-2xl sm:rounded-full max-w-fit mx-auto border border-slate-300/60 shadow-inner">
+      {timelineStages.map((stage) => {
+        const isActive = activeTimelineStage === stage.id;
+        return (
+          <button
+            key={stage.id}
+            type="button"
+            onClick={() => setActiveTimelineStage(stage.id)}
+            className={`px-5 py-2.5 rounded-xl sm:rounded-full text-xs uppercase tracking-wider font-bold transition-all duration-300 ${
+              isActive
+                ? "bg-[#0041f5] text-white shadow-lg shadow-blue-500/25 scale-[1.02]"
+                : "text-slate-700 hover:text-[#0041f5] hover:bg-white/60"
+            }`}
+          >
+            {stage.title}
+          </button>
+        );
+      })}
+    </div>
 
-      {/* SECTION 5: DAY SCHOOL */}
-      <section id="day-school" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 order-2 lg:order-1">
-              <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">Standard Cohort</span>
-              <h2 className="text-3xl md:text-5xl font-tailwind font-black text-slate-950 tracking-tight leading-tight">
-               A Complete Day School Experience
-              </h2>
-              <p className="text-sm text-slate-500 leading-relaxed font-sans">
-               Our Day School program helps students grow through quality CBSE academics, sports, creative activities, and teamwork. It is ideal for families looking for a balanced education in a safe and supportive environment.
-              </p>
+    {/* Active Timeline Content Block */}
+    <AnimatePresence mode="wait">
+      {timelineStages.map(
+        (stage) =>
+          activeTimelineStage === stage.id && (
+            <motion.div
+              key={stage.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white rounded-3xl p-6 sm:p-10 shadow-2xl shadow-blue-900/5 border border-slate-200/80"
+            >
+              {/* Image Container with Floating Badge */}
+              <div className="h-[280px] sm:h-[380px] relative rounded-2xl overflow-hidden shadow-md group">
+                <Image
+                  src={stage.image}
+                  alt={stage.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  loading="lazy"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-60" />
 
-              <div id="day-school-features" className="grid grid-cols-2 gap-4 pt-4">
-                {[
-                  { name: "Smart Learning Classrooms", icon: Tv },
-                  { name: "Astronomy & space workshops", icon: Sparkles },
-                  { name: "Modern Computer Labs", icon: Cpu },
-                  { name: "Music, Dance & Fine Art cycles", icon: Music },
-                ].map((fea, i) => (
-                  <div key={i} className="bg-slate-50 p-4 rounded-xl border border-slate-150 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-blue-550/15 flex items-center justify-center">
-                      <fea.icon className="w-4 h-4 text-[#0041f5]" />
-                    </div>
-                    <span className="text-xs font-bold text-slate-800">{fea.name}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-4">
-                <Link
-                  href="/day-school"
-                  className="px-6 py-3 bg-[#0041f5] text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-blue-600 transition-all shadow-md inline-flex items-center gap-1.5"
-                >
-                  Explore Day School Features
-                  <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="relative aspect-square w-full max-w-[500px] mx-auto rounded-3xl overflow-hidden shadow-2xl order-1 lg:order-2">
-              <Image
-                src="/day-school-class.webp"
-                alt="Active primary day school class"
-                fill
-                sizes="(max-width: 1024px) 100vw, 500px"
-                loading="lazy"
-                className="object-cover"
-              />
-              <div className="absolute top-4 right-4 bg-white/95 backdrop-blur px-4 py-2 rounded-full text-[10px] font-black uppercase text-[#0041f5] border border-blue-500/10 shadow">
-                Nursery to Class XII
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 6: DAY BOARDING */}
-      <section id="day-boarding" className="py-24 bg-[#0041f5] text-white relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative aspect-square w-full max-w-[500px] mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-              <Image
-                src="/day-boarding.webp"
-                alt="Active sports period under day boarding"
-                fill
-                sizes="(max-width: 1024px) 100vw, 500px"
-                loading="lazy"
-                className="object-cover"
-              />
-              <div className="absolute bottom-6 left-6 right-6 bg-slate-950/70 p-4 rounded-2xl backdrop-blur border border-white/10 text-center">
-                <p className="text-xs font-black text-[#fffc4d] uppercase tracking-widest">Ideal for Professional Dual-Working Parents</p>
-                <p className="text-[11px] text-sky-100 mt-1">Academics + Healthy Dining + Extra Sports + Supervised Tutoring</p>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <span className="text-[#fffc4d] text-xs font-black tracking-widest uppercase font-mono">The Ultimate Convenience</span>
-              <h2 className="text-3xl md:text-5xl font-tailwind font-black tracking-tight leading-none text-white">
-                Supervised Day Boarding Program (9 AM – 5 PM)
-              </h2>
-              <p className="text-sm text-sky-100 leading-relaxed">
-                Designed especially for working and corporate parents, our Day Boarding Program provides a safe, structured, and productive environment for children throughout the day.
-Students attend regular classes, enjoy nutritious meals, complete their homework under teacher supervision, and participate in sports and activities before returning home.
-This means parents can focus on their professional commitments with peace of mind, knowing their child is learning, growing, and being cared for in a supportive environment.
-              </p>
-
-              {/* Master Schedule Block */}
-              <div className="bg-slate-900/40 rounded-3xl p-5 border border-white/10 space-y-3.5">
-                <p className="text-xs uppercase tracking-widest font-black text-[#fffc4d]">Daily Chronology</p>
-                <div className="space-y-2.5">
-                  <div className="flex items-center justify-between text-xs py-1.5 border-b border-white/5">
-                    <span className="font-semibold text-slate-100 flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-sky-400" /> 09:00 AM – 02:00 PM
-                    </span>
-                    <span className="text-[#fffc4d] font-bold uppercase tracking-wide">Core Academic Sessions</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs py-1.5 border-b border-white/5">
-                    <span className="font-semibold text-slate-100 flex items-center gap-2">
-                      <Coffee className="w-4 h-4 text-sky-400" /> 02:00 PM – 03:00 PM
-                    </span>
-                    <span className="text-[#fffc4d] font-bold uppercase tracking-wide">Hot Lunch & Quiet Lounge</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs py-1.5">
-                    <span className="font-semibold text-slate-100 flex items-center gap-2">
-                      <Target className="w-4 h-4 text-sky-400" /> 03:00 PM – 05:00 PM
-                    </span>
-                    <span className="text-[#fffc4d] font-bold uppercase tracking-wide">Creative Clubs & Sports Coaching</span>
-                  </div>
+                <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[#0041f5] text-xs font-bold tracking-wide shadow-sm border border-white/50">
+                  <span className="w-2 h-2 rounded-full bg-[#0041f5]" />
+                  <span>{stage.subtitle}</span>
                 </div>
               </div>
 
-              <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
-                <Link
-                  href="/day-boarding"
-                  className="w-full sm:w-auto px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#fffc4d] text-slate-950 hover:bg-yellow-400 transition-all text-center"
-                >
-                  Learn Day Boarding Secrets
-                </Link>
-                <Link
-                  href="/contact"
-                  className="w-full sm:w-auto px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider border border-white/20 text-white hover:bg-white/10 transition-all text-center"
-                >
-                  Download Schedule Booklet
-                </Link>
+              {/* Text & Curriculum Content */}
+              <div className="space-y-6">
+                <div>
+                  <span className="inline-block text-xs font-bold text-amber-800 bg-amber-100/80 border border-amber-200 px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+                    {stage.subtitle}
+                  </span>
+                  <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-slate-950 leading-tight">
+                    {stage.title}
+                  </h3>
+                </div>
+
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                  {stage.description}
+                </p>
+
+                {/* Curriculum Highlights */}
+                <div className="space-y-3 pt-2">
+                  <p className="text-xs font-bold uppercase text-slate-400 tracking-widest">
+                    Curriculum Highlights
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {stage.highlights.map((hlt, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-2.5 p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs font-semibold text-slate-800 hover:bg-blue-50/50 hover:border-blue-100 transition-colors"
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                        <span>{hlt}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Explore Details Link Button */}
+                <div className="pt-4 border-t border-slate-100 flex items-center">
+                  <Link
+                    href={stage.link}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#0041f5] hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 hover:scale-[1.02] active:scale-95 transition-all duration-200"
+                  >
+                    <span>Explore Program Details</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
+            </motion.div>
+          )
+      )}
+    </AnimatePresence>
+  </div>
+</section>
+
+      {/* SECTION 5: DAY SCHOOL */}
+<section id="day-school" className="py-24 bg-white relative overflow-hidden font-sans">
+  {/* Ambient Background Blur */}
+  <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-blue-50/60 rounded-full blur-3xl pointer-events-none" />
+
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      {/* Content Column */}
+      <div className="space-y-6 order-2 lg:order-1">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-[#0041f5] text-xs font-bold tracking-widest uppercase shadow-sm">
+          <span className="w-2 h-2 rounded-full bg-[#0041f5] animate-pulse" />
+          Standard Cohort
+        </div>
+
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-extrabold text-slate-950 tracking-tight leading-tight">
+          A Complete <br className="hidden sm:inline" />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0041f5] to-blue-700">
+            Day School Experience
+          </span>
+        </h2>
+
+        <p className="text-base text-slate-600 leading-relaxed font-normal">
+          Our Day School program helps students grow through quality CBSE academics, sports, creative activities, and teamwork. It is ideal for families looking for a balanced education in a safe and supportive environment.
+        </p>
+
+        {/* Features Grid */}
+        <div id="day-school-features" className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+          {[
+            { name: "Smart Learning Classrooms", icon: Tv },
+            { name: "Astronomy & space workshops", icon: Sparkles },
+            { name: "Modern Computer Labs", icon: Cpu },
+            { name: "Music, Dance & Fine Art cycles", icon: Music },
+          ].map((fea, i) => (
+            <div
+              key={i}
+              className="bg-slate-50/80 hover:bg-white p-4 rounded-2xl border border-slate-200/80 hover:border-[#0041f5]/30 hover:shadow-md transition-all duration-300 flex items-center gap-3.5 group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-[#0041f5]/10 group-hover:bg-[#0041f5] flex items-center justify-center shrink-0 transition-colors duration-300">
+                <fea.icon className="w-5 h-5 text-[#0041f5] group-hover:text-white transition-colors duration-300" />
+              </div>
+              <span className="text-xs font-bold text-slate-800 leading-snug">
+                {fea.name}
+              </span>
             </div>
+          ))}
+        </div>
+
+        {/* CTA Button */}
+        <div className="pt-4">
+          <Link
+            href="/day-school"
+            className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#0041f5] hover:bg-blue-700 text-white rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-blue-500/20 hover:scale-[1.02] active:scale-95"
+          >
+            <span>Explore Day School Features</span>
+            <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+
+      {/* Image Column */}
+      <div className="relative w-full max-w-[500px] mx-auto order-1 lg:order-2 group">
+        {/* Glow Behind Card */}
+        <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500" />
+
+        <div className="relative aspect-square w-full rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80">
+          <Image
+            src="/day-school-class.webp"
+            alt="Active primary day school class"
+            fill
+            sizes="(max-width: 1024px) 100vw, 500px"
+            loading="lazy"
+            className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
+
+          {/* Vignette Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-60" />
+
+          {/* Floating Glassmorphic Badge */}
+          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-[#0041f5] border border-white/60 shadow-lg flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#0041f5]" />
+            Nursery to Class XII
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* SECTION 7: FULL RESIDENTIAL BOARDING */}
-      <section id="full-boarding" className="py-24 bg-[#f6eada]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">Home Away From Home</span>
-            <h2 className="text-3xl md:text-5xl font-tailwind font-extrabold tracking-tight text-slate-900 mt-2">
-              Safe & Comfortable Residential Boarding
-            </h2>
-            <p className="text-sm text-slate-650 max-w-lg mx-auto mt-3">
-              Our separate boarding facilities for boys and girls provide a safe and supportive environment where students can learn and grow with confidence.
+    </div>
+  </div>
+</section>
+
+      {/* SECTION 6: DAY BOARDING */}
+   <section id="day-boarding" className="py-20 lg:py-28 bg-[#0041f5] text-white relative overflow-hidden font-sans">
+  {/* Subtle Background Glows */}
+  <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
+  <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-[#fffc4d]/10 rounded-full blur-3xl pointer-events-none" />
+
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      {/* Left Column: Image Container */}
+      <div className="lg:col-span-5 relative">
+        <div className="relative aspect-[4/5] w-full max-w-[480px] mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/15 group">
+          <Image
+            src="/day-boarding.webp"
+            alt="Active sports period under day boarding"
+            fill
+            sizes="(max-width: 1024px) 100vw, 500px"
+            loading="lazy"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+          
+          {/* Glassmorphism Badge */}
+          <div className="absolute bottom-5 left-5 right-5 bg-slate-950/80 p-4 rounded-2xl backdrop-blur-md border border-white/15 text-center shadow-lg">
+            <p className="text-xs font-extrabold text-[#fffc4d] uppercase tracking-wider">
+              Ideal for Professional Dual-Working Parents
+            </p>
+            <p className="text-[12px] text-sky-100 mt-1 font-medium">
+              Academics + Healthy Dining + Extra Sports + Supervised Tutoring
             </p>
           </div>
+        </div>
+      </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h3 className="font-tailwind font-black text-2xl text-slate-950 leading-tight">
-                A Place to Learn, Grow & Thrive
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Inspired by international boarding school standards, NIMT Beacon's boarding program focuses on academics, personal growth, discipline, and student well-being. With dedicated mentors, caring wardens, medical support, and engaging activities, students enjoy a balanced and enriching residential experience.
-              </p>
+      {/* Right Column: Content Container */}
+      <div className="lg:col-span-7 space-y-8">
+        
+        {/* Header Tag & Title */}
+        <div className="space-y-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15">
+            <span className="w-2 h-2 rounded-full bg-[#fffc4d] animate-pulse" />
+            <span className="text-[#fffc4d] text-xs font-bold tracking-widest uppercase">
+              The Ultimate Convenience
+            </span>
+          </div>
 
-              <div className="space-y-3 pt-2">
-                {[
-                  "Air-conditioned rooms with personal study desks",
-                  "Separate hostel facilities for boys and girls",
-                  "Caring residential wardens and mentors",
-                  "On-campus medical care and professional counselors",
-                  "Healthy and nutritious meals planned for student wellness",
-                  "Weekend activities, educational trips, workshops, movies, and recreational programs",
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                    <span className="text-xs font-semibold text-slate-700 leading-relaxed">{item}</span>
-                  </div>
-                ))}
-              </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white">
+            Supervised Day Boarding Program <span className="text-[#fffc4d]">(9 AM – 5 PM)</span>
+          </h2>
+        </div>
 
-              <div className="flex gap-4 pt-4">
-                <Link
-                  href="/full-boarding"
-                  className="px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-[#0041f5] text-white hover:bg-blue-600 transition-all flex items-center gap-1.5 shadow-md shadow-blue-500/10"
-                >
-                  Tour Our Hostel Facilities
-                  <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
+        {/* Description */}
+        <p className="text-base text-sky-100/90 leading-relaxed font-normal">
+          Designed especially for working and corporate parents, our Day Boarding Program provides a safe, structured, and productive environment for children throughout the day.
+          Students attend regular classes, enjoy nutritious meals, complete their homework under teacher supervision, and participate in sports and activities before returning home.
+          This means parents can focus on their professional commitments with peace of mind, knowing their child is learning, growing, and being cared for in a supportive environment.
+        </p>
+
+        {/* Daily Schedule Timeline Block */}
+        <div className="bg-slate-950/40 rounded-2xl p-6 border border-white/15 backdrop-blur-md space-y-4 shadow-xl">
+          <div className="flex items-center justify-between pb-2 border-b border-white/10">
+            <p className="text-xs uppercase tracking-widest font-extrabold text-[#fffc4d]">
+              Daily Chronology
+            </p>
+            <span className="text-[11px] text-sky-100/70 font-medium">Structured & Balanced</span>
+          </div>
+
+          <div className="space-y-3 pt-1">
+            {/* Slot 1 */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+              <span className="font-semibold text-xs text-slate-100 flex items-center gap-2.5">
+                <div className="p-1.5 rounded-lg bg-sky-500/20 text-sky-400">
+                  <Clock className="w-4 h-4" />
+                </div>
+                09:00 AM – 02:00 PM
+              </span>
+              <span className="text-[#fffc4d] font-bold text-xs uppercase tracking-wide sm:text-right">
+                Core Academic Sessions
+              </span>
             </div>
 
-            <div className="relative h-[350px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
-              <Image
-                src="/hostel.webp"
-                alt="Safe  hostel study lounge"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                loading="lazy"
-                className="object-cover"
-              />
-              <div className="absolute top-4 left-4 bg-[#8a5506] text-[#fffc4d] px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-[#fffc4d]/20">
-                Swiss-Standard Living
-              </div>
+            {/* Slot 2 */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+              <span className="font-semibold text-xs text-slate-100 flex items-center gap-2.5">
+                <div className="p-1.5 rounded-lg bg-sky-500/20 text-sky-400">
+                  <Coffee className="w-4 h-4" />
+                </div>
+                02:00 PM – 03:00 PM
+              </span>
+              <span className="text-[#fffc4d] font-bold text-xs uppercase tracking-wide sm:text-right">
+                Hot Lunch & Quiet Lounge
+              </span>
+            </div>
+
+            {/* Slot 3 */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+              <span className="font-semibold text-xs text-slate-100 flex items-center gap-2.5">
+                <div className="p-1.5 rounded-lg bg-sky-500/20 text-sky-400">
+                  <Target className="w-4 h-4" />
+                </div>
+                03:00 PM – 05:00 PM
+              </span>
+              <span className="text-[#fffc4d] font-bold text-xs uppercase tracking-wide sm:text-right">
+                Creative Clubs & Sports Coaching
+              </span>
             </div>
           </div>
         </div>
-      </section>
+
+        {/* Action Buttons */}
+        <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
+          <Link
+            href="/day-boarding"
+            className="w-full sm:w-auto px-7 py-3.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-[#fffc4d] text-slate-950 hover:bg-yellow-300 hover:shadow-lg hover:shadow-[#fffc4d]/20 transition-all text-center transform hover:-translate-y-0.5"
+          >
+            Learn Day Boarding Secrets
+          </Link>
+        
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+      {/* SECTION 7: FULL RESIDENTIAL BOARDING */}
+    <section id="full-boarding" className="py-20 lg:py-28 bg-[#f6eada] text-slate-900 relative font-sans">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {/* Section Header */}
+    <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0041f5]/10 border border-[#0041f5]/15">
+        <span className="w-2 h-2 rounded-full bg-[#0041f5] animate-pulse" />
+        <span className="text-[#0041f5] text-xs font-extrabold tracking-widest uppercase">
+          Home Away From Home
+        </span>
+      </div>
+
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+        Safe & Comfortable Residential Boarding
+      </h2>
+      
+      <p className="text-base text-slate-650 max-w-xl mx-auto leading-relaxed">
+        Our separate boarding facilities for boys and girls provide a safe and supportive environment where students can learn and grow with confidence.
+      </p>
+    </div>
+
+    {/* Content Grid */}
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      {/* Left Column: Text & Features */}
+      <div className="lg:col-span-7 space-y-8">
+        
+        <div className="space-y-4">
+          <h3 className="font-extrabold text-2xl sm:text-3xl text-slate-950 leading-snug">
+            A Place to Learn, Grow & Thrive
+          </h3>
+          <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+            Inspired by international boarding school standards, NIMT Beacon's boarding program focuses on academics, personal growth, discipline, and student well-being. With dedicated mentors, caring wardens, medical support, and engaging activities, students enjoy a balanced and enriching residential experience.
+          </p>
+        </div>
+
+        {/* Feature Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          {[
+            "Air-conditioned rooms with personal study desks",
+            "Separate hostel facilities for boys and girls",
+            "Caring residential wardens and mentors",
+            "On-campus medical care & professional counselors",
+            "Healthy and nutritious meals planned for student wellness",
+            "Weekend activities, educational trips, workshops & recreation",
+          ].map((item, idx) => (
+            <div 
+              key={idx} 
+              className="flex items-start gap-3 p-3.5 rounded-2xl bg-white/70 border border-slate-900/5 shadow-sm hover:shadow-md hover:bg-white transition-all"
+            >
+              <div className="p-1 rounded-full bg-emerald-100 text-emerald-600 shrink-0 mt-0.5">
+                <CheckCircle2 className="w-4 h-4" />
+              </div>
+              <span className="text-xs font-semibold text-slate-800 leading-snug">
+                {item}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Action Button */}
+        <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
+          <Link
+            href="/full-boarding"
+            className="w-full sm:w-auto px-7 py-3.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-[#0041f5] text-white hover:bg-blue-600 transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 transform hover:-translate-y-0.5"
+          >
+            Tour Our Hostel Facilities
+            <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+      </div>
+
+      {/* Right Column: Image Container */}
+      <div className="lg:col-span-5 relative">
+        <div className="relative aspect-[4/5] w-full max-w-[480px] mx-auto rounded-3xl overflow-hidden shadow-2xl border border-slate-900/10 group">
+          <Image
+            src="/hostel.webp"
+            alt="Safe hostel study lounge"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* SECTION 8: WORLD CLASS CAMPUS GALLERY */}
       <section id="campus-life" className="py-24 bg-white">
@@ -820,159 +987,128 @@ This means parents can focus on their professional commitments with peace of min
           </motion.div>
 
           {/* Detailed facilities route trigger */}
-          <div className="pt-10 text-center">
-            <Link
-              href="/facilities"
-              className="px-6 py-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[#0041f5] text-xs font-bold uppercase tracking-wider rounded-full inline-flex items-center gap-1"
-            >
-              Learn More Campus Spaces
-              <ChevronRight className="w-4 h-4" />
-            </Link>
-          </div>
+
         </div>
       </section>
 
    
 
       {/* SECTION 10: SCHOLASTIC ACHIEVEMENTS */}
-      <section id="achievements" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">The Beacon Standard</span>
-              <h2 className="text-3xl md:text-5xl font-tailwind font-black text-slate-950 tracking-tight leading-tight">
-                Celebrating Outstanding Scholastic Achievements
-              </h2>
-              <p className="text-sm text-slate-500 leading-relaxed font-sans">
-                Our young scholars consistently prove their dominance. Over 25 years, our students have secured top slots in Nationwide CBSE Board Assessments, cleared National Olympiads, and gained entries to premier competitive tracks like IIT-JEE and NEET foundation leagues.
-              </p>
-
-              <div id="school-awards" className="space-y-3 pt-3">
-                {[
-                  "100% Board Pass Rate (Consistent Class XII Results)",
-                  "Over 50+ students clearing Olympiad regional tiers in 2025",
-                  "2 IIT-JEE Top 500 selections from the senior batch in 2025",
-                  "Gold medals in the National Inter-School Rifle Shooting Tournament",
-                ].map((aw, idx) => (
-                  <div key={idx} className="flex items-start gap-2 text-xs font-bold text-slate-700">
-                    <Award className="w-5 h-5 text-[#8a5506] shrink-0" />
-                    <span>{aw}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-2">
-                <Link
-                  href="/achievements"
-                  className="px-6 py-3 bg-[#0041f5] text-white text-xs font-bold uppercase tracking-wider rounded-full hover:bg-blue-600 transition-all shadow inline-flex items-center gap-1"
-                >
-                  View Outstanding Success Stories
-                  <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="p-6 bg-slate-50 border border-slate-150 rounded-2xl text-center">
-                  <p className="text-3xl font-mono font-black text-[#0041f5]">98.6%</p>
-                  <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider mt-1">Class XII Board Topper (2025)</p>
-                </div>
-                <div className="p-6 bg-[#0041f5] text-white rounded-2xl text-center">
-                  <p className="text-3xl font-mono font-black text-[#fffc4d]">12+</p>
-                  <p className="text-[10px] uppercase font-bold text-slate-200 tracking-wider mt-1">JEE / NEET Scholars (2025)</p>
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="p-6 bg-[#8a5506]/15 hover:bg-[#8a5506]/20 transition-all rounded-2xl text-center border border-[#8a5506]/20">
-                  <p className="text-3xl font-mono font-black text-[#8a5506]">Gold</p>
-                  <p className="text-[10px] uppercase font-bold text-slate-650 tracking-wider mt-1">National Shooting Cup 2025</p>
-                </div>
-                <div className="p-6 bg-slate-55 block rounded-2xl text-center border border-slate-200">
-                  <p className="text-3xl font-mono font-black text-slate-800">100+</p>
-                  <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider mt-1">Olympiad Triumphs</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-
-      {/* SECTION 11: PARENTS' CORNER (TESTIMONIALS) */}
-<section id="parents-corner" className="py-24 bg-[#f6eada]">
+ <section id="achievements" className="py-20 lg:py-28 bg-white text-slate-900 relative font-sans">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center max-w-3xl mx-auto mb-16">
-      <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">
-        Parent Testimonials
-      </span>
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      {/* Left Column: Text & Award List */}
+      <div className="lg:col-span-7 space-y-8">
+        
+        <div className="space-y-3.5">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0041f5]/10 border border-[#0041f5]/15">
+            <span className="w-2 h-2 rounded-full bg-[#0041f5] animate-pulse" />
+            <span className="text-[#0041f5] text-xs font-extrabold tracking-widest uppercase">
+              The Beacon Standard
+            </span>
+          </div>
 
-      <h2 className="text-3xl md:text-5xl font-tailwind font-extrabold tracking-tight text-slate-900 mt-2">
-        What Families Say About NIMT Beacon School
-      </h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-950 leading-tight">
+            Celebrating Outstanding Scholastic Achievements
+          </h2>
+          
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl pt-1">
+            Our young scholars consistently prove their dominance. Over 25 years, our students have secured top slots in Nationwide CBSE Board Assessments, cleared National Olympiads, and gained entries to premier competitive tracks like IIT-JEE and NEET foundation leagues.
+          </p>
+        </div>
 
-      <div className="w-16 h-1 bg-[#0041f5] mx-auto mt-4" />
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {[
-        {
-          video: "/videos/testimonial-1.mp4",
-          poster: "/testimonial-1.webp",
-          author: "Parents of Vivan",
-          designation: " Class 5th Student ",
-        },
-        {
-          video: "/videos/testimonial-2.mp4",
-          poster: "/testimonial-2.webp",
-          author: "Parent Of Kavyansh",
-          designation: "Class 11th Student",
-        },
-        {
-          video: "/videos/testimonial-3.mp4",
-          poster: "/testimonial-3.webp",
-          author: "Parent Of Vani Kaushik",
-          designation: "Class 5th Student",
-        },
-      ].map((item, index) => (
-        <div
-          key={index}
-          className="relative overflow-hidden rounded-3xl bg-black shadow-[0_20px_60px_rgba(0,0,0,0.15)] hover:-translate-y-2 transition-all duration-500"
-        >
-          <div className="relative aspect-[9/16]">
-   <video
-  src={item.video}
-  controls
-  playsInline
-  preload="none"
-  poster={item.poster}
-  className="absolute inset-0 w-full h-full object-cover"
-/>
-
-            {/* Gradient Overlay */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-
-            {/* Bottom Content */}
-            <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-5">
-   
-
-              <div className="border-t border-white/20 pt-3">
-                <h4 className="text-white font-bold text-base">
-                  {item.author}
-                </h4>
-
-                <p className="text-white/80 text-xs">
-                  {item.designation}
-                </p>
+        {/* School Awards List */}
+        <div id="school-awards" className="space-y-3 pt-1">
+          {[
+            "100% Board Pass Rate (Consistent Class XII Results)",
+            "Over 50+ students clearing Olympiad regional tiers in 2025",
+            "2 IIT-JEE Top 500 selections from the senior batch in 2025",
+            "Gold medals in the National Inter-School Rifle Shooting Tournament",
+          ].map((aw) => (
+            <div 
+              key={aw} 
+              className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 hover:bg-slate-100/80 transition-all duration-300"
+            >
+              <div className="p-2 rounded-xl bg-[#8a5506]/10 text-[#8a5506] shrink-0">
+                <Award className="w-5 h-5" />
               </div>
+              <span className="text-xs sm:text-sm font-bold text-slate-800 leading-snug">
+                {aw}
+              </span>
             </div>
+          ))}
+        </div>
+
+        {/* Call To Action */}
+        <div className="pt-2">
+          <Link
+            href="/achievements"
+            className="w-full sm:w-auto px-8 py-4 bg-[#0041f5] text-white text-xs font-extrabold uppercase tracking-wider rounded-full hover:bg-blue-600 transition-all duration-300 shadow-lg shadow-blue-500/20 inline-flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
+          >
+            View Outstanding Success Stories
+            <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+      </div>
+
+      {/* Right Column: Dynamic Stat Grid */}
+      <div className="lg:col-span-5 grid grid-cols-2 gap-4 sm:gap-6">
+        
+        <div className="space-y-4 sm:space-y-6">
+          {/* Stat Box 1 */}
+          <div className="p-6 sm:p-8 bg-slate-50 border border-slate-200 rounded-3xl text-center shadow-sm hover:shadow-md transition-all duration-300">
+            <p className="text-4xl sm:text-5xl font-extrabold text-[#0041f5] tracking-tight">
+              98.6%
+            </p>
+            <p className="text-[10px] sm:text-xs uppercase font-extrabold text-slate-500 tracking-wider mt-2">
+              Class XII Board Topper (2025)
+            </p>
+          </div>
+
+          {/* Stat Box 2 */}
+          <div className="p-6 sm:p-8 bg-[#0041f5] text-white rounded-3xl text-center shadow-lg shadow-blue-500/20 hover:shadow-xl transition-all duration-300">
+            <p className="text-4xl sm:text-5xl font-extrabold text-[#fffc4d] tracking-tight">
+              12+
+            </p>
+            <p className="text-[10px] sm:text-xs uppercase font-extrabold text-slate-200 tracking-wider mt-2">
+              JEE / NEET Scholars (2025)
+            </p>
           </div>
         </div>
-      ))}
+
+        <div className="space-y-4 sm:space-y-6 pt-6 sm:pt-10">
+          {/* Stat Box 3 */}
+          <div className="p-6 sm:p-8 bg-[#8a5506]/10 hover:bg-[#8a5506]/15 transition-all duration-300 rounded-3xl text-center border border-[#8a5506]/20 shadow-sm">
+            <p className="text-3xl sm:text-4xl font-extrabold text-[#8a5506] uppercase tracking-tight">
+              Gold
+            </p>
+            <p className="text-[10px] sm:text-xs uppercase font-extrabold text-slate-600 tracking-wider mt-2">
+              National Shooting Cup 2025
+            </p>
+          </div>
+
+          {/* Stat Box 4 */}
+          <div className="p-6 sm:p-8 bg-slate-50 rounded-3xl text-center border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300">
+            <p className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+              100+
+            </p>
+            <p className="text-[10px] sm:text-xs uppercase font-extrabold text-slate-500 tracking-wider mt-2">
+              Olympiad Triumphs
+            </p>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </section>
+      
 
+      {/* SECTION 11: PARENTS' CORNER (TESTIMONIALS) */}
+<ParentsCorner />
       {/* SECTION: INSTAGRAM REELS */}
       <InstagramReels />
 
@@ -1043,192 +1179,221 @@ This means parents can focus on their professional commitments with peace of min
       </section> */}
 
       {/* SECTION 13: ADMISSIONS 2026 CONVERSION BLOCK */}
-      <section id="quick-admissions-form" className="py-24 bg-gradient-to-r from-slate-900 to-slate-950 text-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
-        <div className="absolute top-1/4 left-10 w-96 h-96 rounded-full bg-blue-500/10 blur-[130px] pointer-events-none" />
+  {/* SECTION 13: ADMISSIONS 2026 CONVERSION BLOCK */}
+<section id="quick-admissions-form" className="py-20 lg:py-28 bg-gradient-to-r from-slate-900 to-slate-950 text-white relative overflow-hidden font-sans">
+  {/* Background Accents */}
+  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50" />
+  <div className="absolute top-1/4 -left-20 w-96 h-96 rounded-full bg-blue-500/10 blur-[130px] pointer-events-none" />
+  <div className="absolute bottom-10 right-0 w-80 h-80 rounded-full bg-blue-600/10 blur-[120px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <span className="text-[#fffc4d] text-xs font-black tracking-widest uppercase font-mono">Admission Guidelines 2026-27</span>
-              <h2 className="text-4xl md:text-5xl font-tailwind font-black tracking-tight leading-none text-white">
-           Take the First Step Towards Your Child's Bright Future
-              </h2>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Admissions are now open from Preschool to Class XII. Fill out the enquiry form below, and our admissions team will help you with the next steps, school visit, and admission process.
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      {/* Left Column: Information & Value Props */}
+      <div className="lg:col-span-6 space-y-8">
+        <div className="space-y-4">
+          <span className="inline-block text-[#fffc4d] text-xs font-black tracking-widest uppercase font-sans bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full backdrop-blur-sm">
+            Admission Guidelines 2027-28
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white font-sans">
+            Take the First Step Towards Your Child's Bright Future
+          </h2>
+          <p className="text-base text-slate-300 leading-relaxed font-sans max-w-xl">
+            Admissions are now open from Preschool to Class XII. Fill out the enquiry form, and our admissions team will guide you through the next steps, campus visits, and enrollment process.
+          </p>
+        </div>
 
-              </p>
-
-              <div className="space-y-4 pt-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/10">
-                    <CheckCircle2 className="w-4 h-4 text-[#fffc4d]" />
-                  </div>
-                  <span className="text-xs font-semibold text-slate-300">Student assessment and academic guidance</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/10">
-                    <CheckCircle2 className="w-4 h-4 text-[#fffc4d]" />
-                  </div>
-                  <span className="text-xs font-semibold text-slate-300">Free school brochure and admission information</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/10">
-                    <CheckCircle2 className="w-4 h-4 text-[#fffc4d]" />
-                  </div>
-                  <span className="text-xs font-semibold text-slate-300">Options available for Day School, Day Boarding, and Full Boarding</span>
-                </div>
-              </div>
-
-              <div className="pt-4 flex items-center gap-4">
-                <a
-                  href="https://wa.me/919599931443?text=Hi%20NIMT,%20I%27m%20inquiring%20about%20Admissions%202026"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500 text-white hover:bg-emerald-600 transition-all flex items-center gap-2"
-                >
-                  WhatsApp Admissions Desk
-                </a>
-              </div>
+        {/* Feature Highlights */}
+        <div className="space-y-4 pt-2">
+          <div className="flex items-start gap-3.5">
+            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/15 shrink-0 mt-0.5">
+              <CheckCircle2 className="w-4 h-4 text-[#fffc4d]" />
             </div>
+            <span className="text-sm font-medium text-slate-200 font-sans leading-snug pt-1">
+              Student assessment and personalized academic guidance
+            </span>
+          </div>
 
-            {/* STICKY LEAD CAPTURE CARD */}
-            <div className="bg-white text-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl border border-gray-150 relative">
-              <div className="absolute top-4 right-4 bg-red-100 text-red-700 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest animate-pulse border border-red-200">
-                Admissions Open
-              </div>
-
-              <h3 className="font-tailwind font-black text-xl text-slate-950 mb-1">Request Admissions Kit</h3>
-              <p className="text-xs text-slate-500 mb-6">Complete information details for rapid processing.</p>
-
-              {formSubmitted ? (
-                <div className="bg-slate-50 border border-emerald-500/20 p-6 rounded-2xl text-center space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mx-auto">
-                    <CheckCircle2 className="w-6 h-6" />
-                  </div>
-                  <h4 className="font-tailwind font-bold text-slate-900">Inquiry Received Successfully!</h4>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Thank you, our admissions lead counsellor will call you within 2 business hours with pricing catalog and prospectus sheets. Readying campus tour itinerary!
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1.5">
-                      Parent / Guardian Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="parentName"
-                      required
-                      value={formData.parentName}
-                      onChange={handleFormInputChange}
-                      placeholder="e.g. Vikram Malhotra"
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1.5">
-                        Student&apos;s Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="studentName"
-                        required
-                        value={formData.studentName}
-                        onChange={handleFormInputChange}
-                        placeholder="e.g. Aryan Malhotra"
-                        className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1.5">
-                        Grade / Class Seeking *
-                      </label>
-                      <select
-                        name="targetClass"
-                        value={formData.targetClass}
-                        onChange={handleFormInputChange}
-                        className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all"
-                      >
-                        <option value="Nursery">Nursery / Play School</option>
-                        <option value="Primary">Primary (I - V)</option>
-                        <option value="Middle">Middle (VI - VIII)</option>
-                        <option value="Secondary">Secondary (IX - X)</option>
-                        <option value="SeniorSec">Senior Secondary (XI - XII)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-     <div>
-  <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1.5">
-    Active Phone (WhatsApp) *
-  </label>
-
-  <div className="flex">
-    <span className="inline-flex items-center px-4 rounded-l-xl border border-r-0 border-slate-200 bg-slate-100 text-slate-600 text-sm font-semibold">
-      +91
-    </span>
-
-    <input
-      type="text"
-      name="phone"
-      required
-      value={formData.phone}
-      onChange={(e) => {
-        const value = e.target.value.replace(/\D/g, "");
-        if (value.length <= 10) {
-          setFormData({
-            ...formData,
-            phone: value,
-          });
-        }
-      }}
-      placeholder="9876543210"
-      maxLength={10}
-      pattern="[0-9]{10}"
-      className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] rounded-r-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all"
-    />
-  </div>
-
-  {formData.phone.length > 0 && formData.phone.length < 10 && (
-    <p className="mt-1 text-red-500 text-xs">
-      Mobile number must be exactly 10 digits
-    </p>
-  )}
-</div>
-                    <div>
-                      <label className="block text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1.5">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleFormInputChange}
-                        placeholder="e.g. parent@email.com"
-                        className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="pt-4">
-                    <button
-                      type="submit"
-                      className="w-full py-4 rounded-xl text-xs font-bold tracking-wider uppercase bg-[#0041f5] text-white hover:bg-blue-600 transition-all font-sans shadow-lg shadow-blue-500/10 cursor-pointer text-center"
-                    >
-                      Submit Official Admissions Request
-                    </button>
-                  </div>
-                </form>
-              )}
+          <div className="flex items-start gap-3.5">
+            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/15 shrink-0 mt-0.5">
+              <CheckCircle2 className="w-4 h-4 text-[#fffc4d]" />
             </div>
+            <span className="text-sm font-medium text-slate-200 font-sans leading-snug pt-1">
+              Free school brochure and detailed admission information kit
+            </span>
+          </div>
+
+          <div className="flex items-start gap-3.5">
+            <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/15 shrink-0 mt-0.5">
+              <CheckCircle2 className="w-4 h-4 text-[#fffc4d]" />
+            </div>
+            <span className="text-sm font-medium text-slate-200 font-sans leading-snug pt-1">
+              Options available for Day School, Day Boarding, and Full Boarding
+            </span>
           </div>
         </div>
-      </section>
+
+        {/* WhatsApp Direct CTA */}
+        <div className="pt-2">
+          <a
+            href="https://wa.me/919599931443?text=Hi%20NIMT,%20I%27m%20inquiring%20about%20Admissions%202026"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500 text-white hover:bg-emerald-600 transition-all font-sans shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transform hover:-translate-y-0.5"
+          >
+            WhatsApp Admissions Desk
+          </a>
+        </div>
+      </div>
+
+      {/* Right Column: Lead Capture Form Card */}
+      <div className="lg:col-span-6">
+        <div className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl border border-slate-100 relative font-sans">
+          
+          {/* Badge */}
+          <div className="absolute top-6 right-6 bg-red-50 text-red-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse border border-red-200/80">
+            Admissions Open
+          </div>
+
+          <div className="mb-6 space-y-1">
+            <h3 className="font-sans font-black text-2xl text-slate-950 tracking-tight">
+              Request Admissions Kit
+            </h3>
+            <p className="text-xs text-slate-500 font-sans">
+              Complete information details for rapid priority processing.
+            </p>
+          </div>
+
+          {formSubmitted ? (
+            <div className="bg-emerald-50/60 border border-emerald-500/20 p-8 rounded-2xl text-center space-y-4 my-4 font-sans">
+              <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mx-auto shadow-sm">
+                <CheckCircle2 className="w-7 h-7" />
+              </div>
+              <h4 className="font-sans font-bold text-lg text-slate-900">
+                Inquiry Received Successfully!
+              </h4>
+              <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto font-sans">
+                Thank you! Our lead admissions counselor will call you within 2 business hours with full pricing catalogs, prospectus sheets, and campus tour schedules.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleFormSubmit} className="space-y-4 font-sans">
+              <div>
+                <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+                  Parent / Guardian Name *
+                </label>
+                <input
+                  type="text"
+                  name="parentName"
+                  required
+                  value={formData.parentName}
+                  onChange={handleFormInputChange}
+                  placeholder="e.g. Vikram Malhotra"
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+                    Student's Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="studentName"
+                    required
+                    value={formData.studentName}
+                    onChange={handleFormInputChange}
+                    placeholder="e.g. Aryan Malhotra"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+                    Grade / Class Seeking *
+                  </label>
+                  <select
+                    name="targetClass"
+                    value={formData.targetClass}
+                    onChange={handleFormInputChange}
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+                  >
+                    <option value="Nursery">Nursery / Play School</option>
+                    <option value="Primary">Primary (I - V)</option>
+                    <option value="Middle">Middle (VI - VIII)</option>
+                    <option value="Secondary">Secondary (IX - X)</option>
+                    <option value="SeniorSec">Senior Secondary (XI - XII)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+                    Active Phone (WhatsApp) *
+                  </label>
+                  <div className="flex">
+                    <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-200 bg-slate-100 text-slate-600 text-xs font-semibold font-sans">
+                      +91
+                    </span>
+                    <input
+                      type="text"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "");
+                        if (value.length <= 10) {
+                          setFormData({
+                            ...formData,
+                            phone: value,
+                          });
+                        }
+                      }}
+                      placeholder="9876543210"
+                      maxLength={10}
+                      pattern="[0-9]{10}"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-r-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+                    />
+                  </div>
+                  {formData.phone.length > 0 && formData.phone.length < 10 && (
+                    <p className="mt-1 text-red-500 text-[11px] font-sans">
+                      Mobile number must be exactly 10 digits
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleFormInputChange}
+                    placeholder="e.g. parent@email.com"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-3">
+                <button
+                  type="submit"
+                  className="w-full py-4 rounded-xl text-xs font-extrabold tracking-wider uppercase bg-[#0041f5] text-white hover:bg-blue-600 transition-all font-sans shadow-lg shadow-blue-500/25 hover:shadow-blue-500/35 cursor-pointer text-center transform hover:-translate-y-0.5"
+                >
+                  Submit Official Admissions Request
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* SECTION 14: FAQ BLOCK */}
       <section id="faq-accordions" className="py-24 bg-white">
@@ -1279,79 +1444,130 @@ This means parents can focus on their professional commitments with peace of min
       </section>
 
       {/* SECTION 15: CAMPUS LOCATION AND MAP */}
-      <section id="campus-location" className="py-24 bg-[#f6eada]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">Visit Ghaziabad Campus</span>
-              <h2 className="text-4xl font-tailwind font-black tracking-tight text-slate-950 leading-tight">
-                Our Landmark Ghaziabad Campus Site
-              </h2>
-              <p className="text-sm text-slate-600 leading-relaxed font-sans">
-                Located in the well-connected residential area of Ansal Avantika-II, Ghaziabad, NIMT Beacon School provides a safe, green, and student-friendly learning environment designed to support academic excellence and holistic development
+ {/* SECTION: CAMPUS LOCATION */}
+<section id="campus-location" className="py-20 lg:py-28 bg-[#f6eada] text-slate-900 font-sans relative overflow-hidden">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      {/* Left Column: Information & Address Details */}
+      <div className="lg:col-span-6 space-y-8 font-sans">
+        <div className="space-y-3.5">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0041f5]/10 border border-[#0041f5]/20 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-[#0041f5] animate-pulse" />
+            <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase font-sans">
+              Visit Ghaziabad Campus
+            </span>
+          </div>
 
-              </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-950 leading-tight font-sans">
+            Our Landmark Ghaziabad Campus Site
+          </h2>
 
-              <div id="school-location-details" className="space-y-4">
-                <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-[#0041f5] shrink-0 mt-0.5" />
-                  <div>
-                    <h5 className="font-tailwind font-bold text-xs text-slate-950">Campus Main Location</h5>
-                    <p className="text-xs text-slate-500 mt-1">Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar, Ghaziabad, Uttar Pradesh 201002</p>
-                  </div>
-                </div>
+          <p className="text-base text-slate-700 leading-relaxed font-sans max-w-xl">
+            Located in the well-connected residential area of Ansal Avantika-II, Ghaziabad, NIMT Beacon School provides a safe, green, and student-friendly learning environment designed to support academic excellence and holistic development.
+          </p>
+        </div>
 
-                <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex items-start gap-3">
-                  <Navigation className="w-5 h-5 text-[#8a5506] shrink-0 mt-0.5" />
-                  <div>
-                    <h5 className="font-tailwind font-bold text-xs text-slate-950">Quick Driving Directions</h5>
-                    <p className="text-xs text-slate-500 mt-1">Easily accessible via NH-24 and the Delhi-Meerut Expressway. Just a 20-minute drive from Indirapuram and Noida Sector 62.</p>
-                  </div>
-                </div>
-              </div>
+        {/* Location Info Cards */}
+        <div id="school-location-details" className="space-y-4 font-sans">
+          {/* Card 1: Main Location */}
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-[#0041f5]/30 hover:shadow-md transition-all duration-300 flex items-start gap-4">
+            <div className="p-3 rounded-xl bg-[#0041f5]/10 text-[#0041f5] shrink-0">
+              <MapPin className="w-6 h-6" />
             </div>
+            <div className="space-y-1">
+              <h3 className="font-sans font-bold text-sm text-slate-950">
+                Campus Main Location
+              </h3>
+              <p className="text-xs text-slate-600 font-sans leading-relaxed">
+                Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar, Ghaziabad, Uttar Pradesh 201002
+              </p>
+            </div>
+          </div>
 
-            {/* Interactive maps placeholder styled beautifully */}
-            <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-slate-250 bg-slate-900 text-white flex flex-col justify-between p-8">
-              {/* Background graphic grid & route design */}
-              <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] z-0" />
-              <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-900 to-[#0041f5]/30 z-0" />
-              
-              <div className="relative z-10 flex flex-col h-full justify-between">
-                <div>
-                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-widest mb-4">
-                    <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping" />
-                    Central Campus Locator
-                  </span>
-                  <h4 className="font-tailwind font-bold text-2xl text-white">NIMT Beacon School ghaziabad</h4>
-                  <p className="text-sm text-slate-300 mt-2 max-w-lg">Ansal Avantika-II, Ghaziabad, Uttar Pradesh, India - 201013</p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-                    <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Expressway Connectivity</p>
-                    <p className="text-sm text-[#fffc4d] font-semibold mt-1">NH-24 Expressway (2.5 KM)</p>
-                  </div>
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-                    <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Transit Time</p>
-                    <p className="text-sm text-[#fffc4d] font-semibold mt-1">20 Min from Indirapuram & Noida Sec 62</p>
-                  </div>
-                </div>
-
-                <a
-                  href="https://maps.google.com/?q=NIMT+Beacon+School+Ansal+Avantika-II+Ghaziabad"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full bg-[#0041f5] hover:bg-blue-600 text-white text-center py-4 rounded-xl text-sm font-bold uppercase tracking-wider transition-all shadow-xl flex items-center justify-center gap-2"
-                >
-                  <Navigation className="w-4 h-4" />
-                  Launch Live GPS Directions
-                </a>
-              </div>
+          {/* Card 2: Driving Directions */}
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-[#8a5506]/30 hover:shadow-md transition-all duration-300 flex items-start gap-4">
+            <div className="p-3 rounded-xl bg-[#8a5506]/10 text-[#8a5506] shrink-0">
+              <Navigation className="w-6 h-6" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-sans font-bold text-sm text-slate-950">
+                Quick Driving Directions
+              </h3>
+              <p className="text-xs text-slate-600 font-sans leading-relaxed">
+                Easily accessible via NH-24 and the Delhi-Meerut Expressway. Just a 20-minute drive from Indirapuram and Noida Sector 62.
+              </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Right Column: Interactive Map Placeholder Card */}
+      <div className="lg:col-span-6 font-sans">
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 text-white p-6 sm:p-8 flex flex-col justify-between min-h-[440px] group">
+          
+          {/* Subtle Background Radial Pattern */}
+          <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] z-0" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-900 to-[#0041f5]/30 z-0" />
+
+          {/* Card Content Container */}
+          <div className="relative z-10 flex flex-col h-full justify-between space-y-6 font-sans">
+            
+            {/* Top Header */}
+            <div>
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-widest mb-4 font-sans backdrop-blur-md">
+                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping" />
+                Central Campus Locator
+              </span>
+              <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
+                NIMT Beacon School Ghaziabad
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 mt-2 font-sans max-w-lg leading-relaxed">
+                Ansal Avantika-II, Ghaziabad, Uttar Pradesh, India - 201013
+              </p>
+            </div>
+
+            {/* Middle Stats / Highlights Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-2 font-sans">
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 transition-all group-hover:border-white/20">
+                <p className="text-[10px] uppercase tracking-wider text-slate-400 font-extrabold font-sans">
+                  Expressway Connectivity
+                </p>
+                <p className="text-xs sm:text-sm text-[#fffc4d] font-bold mt-1 font-sans">
+                  NH-24 Expressway (2.5 KM)
+                </p>
+              </div>
+
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 transition-all group-hover:border-white/20">
+                <p className="text-[10px] uppercase tracking-wider text-slate-400 font-extrabold font-sans">
+                  Transit Time
+                </p>
+                <p className="text-xs sm:text-sm text-[#fffc4d] font-bold mt-1 font-sans">
+                  20 Min from Indirapuram & Noida Sec 62
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Action Button */}
+            <div className="pt-2">
+              <a
+                href="https://maps.google.com/?q=NIMT+Beacon+School+Ansal+Avantika-II+Ghaziabad"
+                target="_blank"
+                rel="noreferrer"
+                className="w-full bg-[#0041f5] hover:bg-blue-600 text-white text-center py-4 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all duration-300 shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 font-sans transform hover:-translate-y-0.5"
+              >
+                <Navigation className="w-4 h-4" />
+                Launch Live GPS Directions
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
     </div>
   );
 }
