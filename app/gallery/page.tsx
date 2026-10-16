@@ -187,7 +187,22 @@ const GALLERY_IMAGES: ImageItem[] = [
     width: 800,
     height: 800, // Medium/Square
   },
-
+  {
+    id: 'img-15',
+    unsplashId: 'independence-day-celebration.webp',
+    alt: 'NIMT independence day celebration',
+    categories: ['Academics', 'Library'],
+    width: 800,
+    height: 800, // Medium/Square
+  },
+    {
+    id: 'img-16',
+    unsplashId: 'happy-moment.webp',
+    alt: 'NIMT happy-moment',
+    categories: ['Academics', 'Library'],
+    width: 800,
+    height: 800, // Medium/Square
+  },
 
 ];
 
