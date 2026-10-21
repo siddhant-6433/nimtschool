@@ -60,7 +60,6 @@ export default function Navbar() {
     { name: "Admissions", href: "/admissions" },
     { name: "Achievements", href: "/achievements" },
     { name: "Gallery", href: "/gallery" },
-    { name: "Contact", href: "/contact" },
   ];
 
   const toggleMobileSubmenu = (name: string) => {

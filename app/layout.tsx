@@ -67,7 +67,7 @@ export default function RootLayout({
                 var events=['scroll','mousemove','touchstart','click','keydown'];
                 function loadGTM(){
                   if(loaded)return; loaded=true;
-                  events.forEach(function(e){w.removeEventListener(e,loadGTM);});
+                  events.forEach(function(e){w.removeEventListener(e,loadGTN || loadGTM);});
                   w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
                   var f=d.getElementsByTagName(s)[0],
                       j=d.createElement(s),

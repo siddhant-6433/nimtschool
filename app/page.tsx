@@ -107,7 +107,7 @@ export default function Home() {
       ],
       description:
 
-        "A happy and caring environment where young children learn, explore, and grow through fun activities. Our Early Years program helps children build confidence, communication skills, and a love for learning in safe and engaging classrooms.",
+        "",
       link: "/day-school",
     },
     {
@@ -122,7 +122,7 @@ export default function Home() {
         "Project-based learning to encourage curiosity and confidence",
       ],
       description:
-        "Building strong skills in language, mathematics, and environmental studies. Students learn teamwork, creativity, and problem-solving through fun and practical activities.",
+        "",
       link: "/day-school",
     },
     {
@@ -137,7 +137,7 @@ export default function Home() {
         "Practical learning through projects and experiments",
       ],
       description:
-        "Helping students turn classroom learning into real-world skills. Middle school encourages independent thinking, hands-on science learning, and specialized sports training.",
+        "",
       link: "/day-school",
     },
     {
@@ -152,7 +152,7 @@ export default function Home() {
         "Leadership seminars and career track profiling",
       ],
       description:
-        "Focused on strong CBSE board exam preparation while helping students build confidence, leadership skills, and career awareness. Students receive personal guidance and mentorship to support their academic and future goals.",
+        "",
       link: "/academics",
     },
     {
@@ -167,7 +167,7 @@ export default function Home() {
         "Innovation, research, and entrepreneurship projects",
       ],
       description:
-        "Designed to help students excel in CBSE board exams and prepare for admission to leading universities in India and abroad. Expert faculty, focused guidance, and career planning help students achieve their future goals.",
+       "",
       link: "/academics",
     },
   ];
@@ -265,33 +265,48 @@ export default function Home() {
     }
   }, [heroVideoReady]);
 
-  const faqs = [
-    {
-      question: "What is the admission procedure for the 2026-27 academic year?",
-      answer:
-        "The process starts by filling out our online Inquiry Form or visiting the school campus in Ghaziabad. Our admissions team will then guide you through a personalized campus tour, an interactive session with the parents, and a baseline skill assessment for your child to determine placement.",
-    },
-    {
-      question: "What streams and integrated competitive coaching are offered?",
-      answer:
-        "NIMT Beacon School offers Science, Commerce, and Humanities. We provide an Integrated Foundation program for JEE (Engineering) & NEET (Medical) from Class VI onwards, taught by  coaching veterans, fully synchronized with CBSE hours.",
-    },
-    {
-      question: "What is the structure and schedule of the Day Boarding program?",
-      answer:
-        "Our Day Boarding operates from 9:00 AM to 5:00 PM. From 9:00 AM to 2:00 PM, children follow academic cycles. From 2:00 PM onwards, they enjoy nutritious hot lunches, followed by mandatory supervised homework tutorials, foreign language classes, and specialized sports coaching.",
-    },
-    {
-      question: "Can you describe the boarding and safety configurations on campus?",
-      answer:
-        "We maintain  air-conditioned separate wings for boys and girls, supervised by experienced resident house wardens. Security is absolute: 24/7 CCTV surveillance, biometric check-ins, a full-time residential nurse with ambulance access, and organic, healthy meals prepared under strict hygiene standards.",
-    },
-    {
-      question: "Where is NIMT Beacon School situated, and is transportation available?",
-      answer:
-        "The campus is situated in Ansal Avantika-II, Ghaziabad, Uttar Pradesh. We operate a fleet of , fully air-conditioned GPS-enabled school buses with on-board cameras, male/female security guards, and real-time tracking apps for parents.",
-    },
-  ];
+const faqs = [
+  {
+    question: "What is the admission process at NIMT Beacon School?",
+    answer:
+      "To start the admission process, parents can fill out the enquiry form on our website or visit the school campus. Our admission team will share the details about the school, available classes, fees, and the next steps.",
+  },
+  {
+    question: "Which classes are open for admission at NIMT Beacon School?",
+    answer:
+      "NIMT Beacon School offers admission from Nursery to Class XII. Parents can contact the school to check the current availability for their child's class and learn about the admission process.",
+  },
+  {
+    question: "Does NIMT Beacon School offer JEE and NEET preparation?",
+    answer:
+      "Yes. NIMT Beacon School offers integrated JEE and NEET preparation for students in Classes XI and XII. The preparation is planned along with the regular school curriculum.",
+  },
+  {
+    question: "What is the Day Boarding facility at NIMT Beacon School?",
+    answer:
+      "The Day Boarding programme allows students to stay at school for extended hours. Along with regular classes, students get time for study support, activities, sports, and other learning programmes before returning home.",
+  },
+  {
+    question: "Does NIMT Beacon School provide boarding facilities?",
+    answer:
+      "Yes. NIMT Beacon School offers residential boarding facilities for students. The programme includes regular schooling along with supervised study time, activities, sports, and residential care.",
+  },
+  {
+    question: "Where is NIMT Beacon School located?",
+    answer:
+      "NIMT Beacon School is located in Avantika, Ghaziabad, Uttar Pradesh. Parents can visit the campus to learn more about the school, facilities, admission process, and available programmes.",
+  },
+  {
+    question: "Does NIMT Beacon School provide school transport?",
+    answer:
+      "Yes. School transport is available for students from selected areas of Ghaziabad and nearby locations. Parents can contact the school to check the available routes and transport details.",
+  },
+  {
+    question: "What facilities are available at NIMT Beacon School?",
+    answer:
+      "The school has facilities for academics, sports, computer learning, science labs, co-curricular activities, and student development. Day Boarding and residential facilities are also available.",
+  },
+];
 
   const toggleFaq = (idx: number) => {
     setOpenFaq(openFaq === idx ? null : idx);
@@ -385,10 +400,6 @@ export default function Home() {
           NIMT Beacon School
         </span>
       </h2>
-
-      <p className="mt-4 text-slate-600 text-base md:text-lg font-normal max-w-2xl mx-auto">
-        Empowering students with academic excellence, leadership skills, and world-class facilities in a nurturing environment.
-      </p>
     </div>
 
     {/* Feature Grid */}
@@ -448,10 +459,10 @@ export default function Home() {
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
       {[
-        { num: "25+", label: "Years of Educational Excellence" },
-        { num: "2000+", label: "Nurtured Global Scholars" },
-        { num: "98%", label: "Verified Parent Satisfaction Rate" },
-        { num: "100+", label: "Top National & Global Uni Placements" },
+        { num: "25+", label: "Years of Excellence" },
+        { num: "2000+", label: "Students Nurtured" },
+        { num: "98%", label: "Parent Satisfaction Rate" },
+        { num: "100+", label: "Olympiad Achievements" },
         { num: "85%+", label: "Consistent Class XII First Division Outcomes" },
       ].map((stat, idx) => (
         <div
@@ -499,9 +510,6 @@ export default function Home() {
         </span>
       </h2>
 
-      <p className="text-base text-slate-600 max-w-xl mx-auto mt-4 font-normal leading-relaxed">
-        Explore how NIMT shapes character and unlocks peak academic potential from early childhood development up to competitive Class XII board prep.
-      </p>
     </div>
 
     {/* Timeline Switch Controls */}
@@ -629,9 +637,6 @@ export default function Home() {
           </span>
         </h2>
 
-        <p className="text-base text-slate-600 leading-relaxed font-normal">
-          Our Day School program helps students grow through quality CBSE academics, sports, creative activities, and teamwork. It is ideal for families looking for a balanced education in a safe and supportive environment.
-        </p>
 
         {/* Features Grid */}
         <div id="day-school-features" className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
@@ -722,7 +727,7 @@ export default function Home() {
           {/* Glassmorphism Badge */}
           <div className="absolute bottom-5 left-5 right-5 bg-slate-950/80 p-4 rounded-2xl backdrop-blur-md border border-white/15 text-center shadow-lg">
             <p className="text-xs font-extrabold text-[#fffc4d] uppercase tracking-wider">
-              Ideal for Professional Dual-Working Parents
+              Ideal for Working Parents
             </p>
             <p className="text-[12px] text-sky-100 mt-1 font-medium">
               Academics + Healthy Dining + Extra Sports + Supervised Tutoring
@@ -744,16 +749,12 @@ export default function Home() {
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white">
-            Supervised Day Boarding Program <span className="text-[#fffc4d]">(9 AM – 5 PM)</span>
+            Day Boarding <span className="text-[#fffc4d]">(9 AM – 5 PM)</span>
           </h2>
         </div>
 
         {/* Description */}
-        <p className="text-base text-sky-100/90 leading-relaxed font-normal">
-          Designed especially for working and corporate parents, our Day Boarding Program provides a safe, structured, and productive environment for children throughout the day.
-          Students attend regular classes, enjoy nutritious meals, complete their homework under teacher supervision, and participate in sports and activities before returning home.
-          This means parents can focus on their professional commitments with peace of mind, knowing their child is learning, growing, and being cared for in a supportive environment.
-        </p>
+ 
 
         {/* Daily Schedule Timeline Block */}
         <div className="bg-slate-950/40 rounded-2xl p-6 border border-white/15 backdrop-blur-md space-y-4 shadow-xl">
@@ -774,7 +775,7 @@ export default function Home() {
                 09:00 AM – 02:00 PM
               </span>
               <span className="text-[#fffc4d] font-bold text-xs uppercase tracking-wide sm:text-right">
-                Core Academic Sessions
+                Academics
               </span>
             </div>
 
@@ -787,7 +788,7 @@ export default function Home() {
                 02:00 PM – 03:00 PM
               </span>
               <span className="text-[#fffc4d] font-bold text-xs uppercase tracking-wide sm:text-right">
-                Hot Lunch & Quiet Lounge
+                Lunch & Lounge
               </span>
             </div>
 
@@ -800,7 +801,7 @@ export default function Home() {
                 03:00 PM – 05:00 PM
               </span>
               <span className="text-[#fffc4d] font-bold text-xs uppercase tracking-wide sm:text-right">
-                Creative Clubs & Sports Coaching
+                Sports & Clubs
               </span>
             </div>
           </div>
@@ -840,9 +841,7 @@ export default function Home() {
         Safe & Comfortable Residential Boarding
       </h2>
       
-      <p className="text-base text-slate-650 max-w-xl mx-auto leading-relaxed">
-        Our separate boarding facilities for boys and girls provide a safe and supportive environment where students can learn and grow with confidence.
-      </p>
+   
     </div>
 
     {/* Content Grid */}
@@ -855,9 +854,7 @@ export default function Home() {
           <h3 className="font-extrabold text-2xl sm:text-3xl text-slate-950 leading-snug">
             A Place to Learn, Grow & Thrive
           </h3>
-          <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-            Inspired by international boarding school standards, NIMT Beacon's boarding program focuses on academics, personal growth, discipline, and student well-being. With dedicated mentors, caring wardens, medical support, and engaging activities, students enjoy a balanced and enriching residential experience.
-          </p>
+         
         </div>
 
         {/* Feature Cards Grid */}
@@ -1013,9 +1010,7 @@ export default function Home() {
             Celebrating Outstanding Scholastic Achievements
           </h2>
           
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl pt-1">
-            Our young scholars consistently prove their dominance. Over 25 years, our students have secured top slots in Nationwide CBSE Board Assessments, cleared National Olympiads, and gained entries to premier competitive tracks like IIT-JEE and NEET foundation leagues.
-          </p>
+   
         </div>
 
         {/* School Awards List */}
@@ -1198,9 +1193,7 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white font-sans">
             Take the First Step Towards Your Child's Bright Future
           </h2>
-          <p className="text-base text-slate-300 leading-relaxed font-sans max-w-xl">
-            Admissions are now open from Preschool to Class XII. Fill out the enquiry form, and our admissions team will guide you through the next steps, campus visits, and enrollment process.
-          </p>
+    
         </div>
 
         {/* Feature Highlights */}
@@ -1210,7 +1203,7 @@ export default function Home() {
               <CheckCircle2 className="w-4 h-4 text-[#fffc4d]" />
             </div>
             <span className="text-sm font-medium text-slate-200 font-sans leading-snug pt-1">
-              Student assessment and personalized academic guidance
+              Day School
             </span>
           </div>
 
@@ -1219,7 +1212,7 @@ export default function Home() {
               <CheckCircle2 className="w-4 h-4 text-[#fffc4d]" />
             </div>
             <span className="text-sm font-medium text-slate-200 font-sans leading-snug pt-1">
-              Free school brochure and detailed admission information kit
+             Day Boarding
             </span>
           </div>
 
@@ -1228,7 +1221,7 @@ export default function Home() {
               <CheckCircle2 className="w-4 h-4 text-[#fffc4d]" />
             </div>
             <span className="text-sm font-medium text-slate-200 font-sans leading-snug pt-1">
-              Options available for Day School, Day Boarding, and Full Boarding
+              Residential Boarding
             </span>
           </div>
         </div>
@@ -1445,124 +1438,91 @@ export default function Home() {
 
       {/* SECTION 15: CAMPUS LOCATION AND MAP */}
  {/* SECTION: CAMPUS LOCATION */}
-<section id="campus-location" className="py-20 lg:py-28 bg-[#f6eada] text-slate-900 font-sans relative overflow-hidden">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+<section id="campus-location" className="py-12 lg:py-16 bg-[#f6eada] text-slate-900 font-sans">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {/* Section Heading */}
+    <div className="mb-8">
+      <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">
+        Visit Us
+      </span>
+      <h2 className="text-2xl sm:text-3xl font-black text-slate-950 mt-1">
+        NIMT Beacon School Ghaziabad
+      </h2>
+    </div>
+
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
-      {/* Left Column: Information & Address Details */}
-      <div className="lg:col-span-6 space-y-8 font-sans">
-        <div className="space-y-3.5">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0041f5]/10 border border-[#0041f5]/20 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-[#0041f5] animate-pulse" />
-            <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase font-sans">
-              Visit Ghaziabad Campus
-            </span>
+      {/* Left Column: Quick Contact & Address (NAP for Local SEO) */}
+      <div className="lg:col-span-5 space-y-4">
+        
+        {/* Address Card */}
+        <address className="not-italic bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+          <div className="p-2.5 rounded-xl bg-[#0041f5]/10 text-[#0041f5] shrink-0">
+            <MapPin className="w-5 h-5" />
           </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-950 leading-tight font-sans">
-            Our Landmark Ghaziabad Campus Site
-          </h2>
-
-          <p className="text-base text-slate-700 leading-relaxed font-sans max-w-xl">
-            Located in the well-connected residential area of Ansal Avantika-II, Ghaziabad, NIMT Beacon School provides a safe, green, and student-friendly learning environment designed to support academic excellence and holistic development.
-          </p>
-        </div>
-
-        {/* Location Info Cards */}
-        <div id="school-location-details" className="space-y-4 font-sans">
-          {/* Card 1: Main Location */}
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-[#0041f5]/30 hover:shadow-md transition-all duration-300 flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-[#0041f5]/10 text-[#0041f5] shrink-0">
-              <MapPin className="w-6 h-6" />
-            </div>
-            <div className="space-y-1">
-              <h3 className="font-sans font-bold text-sm text-slate-950">
-                Campus Main Location
-              </h3>
-              <p className="text-xs text-slate-600 font-sans leading-relaxed">
-                Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar, Ghaziabad, Uttar Pradesh 201002
-              </p>
-            </div>
+          <div className="text-xs space-y-1">
+            <h3 className="font-bold text-sm text-slate-950">Campus Address</h3>
+            <p className="text-slate-700 leading-snug">
+              Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar, Ghaziabad, Uttar Pradesh 201002
+            </p>
+            <p className="text-slate-500 font-medium pt-1">Landmark: Near NH-24 Expressway</p>
           </div>
+        </address>
 
-          {/* Card 2: Driving Directions */}
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-[#8a5506]/30 hover:shadow-md transition-all duration-300 flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-[#8a5506]/10 text-[#8a5506] shrink-0">
-              <Navigation className="w-6 h-6" />
-            </div>
-            <div className="space-y-1">
-              <h3 className="font-sans font-bold text-sm text-slate-950">
-                Quick Driving Directions
-              </h3>
-              <p className="text-xs text-slate-600 font-sans leading-relaxed">
-                Easily accessible via NH-24 and the Delhi-Meerut Expressway. Just a 20-minute drive from Indirapuram and Noida Sector 62.
-              </p>
-            </div>
+        {/* Quick Connectivity */}
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+          <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-700 shrink-0">
+            <Navigation className="w-5 h-5" />
+          </div>
+          <div className="text-xs space-y-1">
+            <h3 className="font-bold text-sm text-slate-950">Connectivity</h3>
+            <ul className="text-slate-700 space-y-1 pt-1 list-disc list-inside">
+              <li>2.5 KM from NH-24 / Delhi-Meerut Expressway</li>
+              <li>20 Min drive from Indirapuram & Noida Sec 62</li>
+            </ul>
           </div>
         </div>
+
+        {/* Operating Hours & Contact */}
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+          <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 shrink-0">
+            <Clock className="w-5 h-5" />
+          </div>
+          <div className="text-xs space-y-1">
+            <h3 className="font-bold text-sm text-slate-950">Visiting Hours</h3>
+            <p className="text-slate-700">Mon – Sat: 8:00 AM – 3:30 PM</p>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="pt-2 flex flex-col sm:flex-row gap-3">
+          <a
+            href="https://www.google.com/maps/place/NIMT+School/@28.6759172,77.4858839,17z/data=!4m6!3m5!1s0x390cf23c33895dd5:0xdd7935e9b376c294!8m2!3d28.6759172!4d77.4884642!16s%2Fg%2F113hfc4sb"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 bg-[#0041f5] hover:bg-blue-700 text-white text-center py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md"
+          >
+            <Navigation className="w-4 h-4" />
+            Get Directions
+          </a>
+        </div>
+
       </div>
 
-      {/* Right Column: Interactive Map Placeholder Card */}
-      <div className="lg:col-span-6 font-sans">
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 text-white p-6 sm:p-8 flex flex-col justify-between min-h-[440px] group">
-          
-          {/* Subtle Background Radial Pattern */}
-          <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] z-0" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-900 to-[#0041f5]/30 z-0" />
-
-          {/* Card Content Container */}
-          <div className="relative z-10 flex flex-col h-full justify-between space-y-6 font-sans">
-            
-            {/* Top Header */}
-            <div>
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-[10px] font-bold uppercase tracking-widest mb-4 font-sans backdrop-blur-md">
-                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping" />
-                Central Campus Locator
-              </span>
-              <h3 className="font-sans font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
-                NIMT Beacon School Ghaziabad
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 mt-2 font-sans max-w-lg leading-relaxed">
-                Ansal Avantika-II, Ghaziabad, Uttar Pradesh, India - 201013
-              </p>
-            </div>
-
-            {/* Middle Stats / Highlights Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-2 font-sans">
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 transition-all group-hover:border-white/20">
-                <p className="text-[10px] uppercase tracking-wider text-slate-400 font-extrabold font-sans">
-                  Expressway Connectivity
-                </p>
-                <p className="text-xs sm:text-sm text-[#fffc4d] font-bold mt-1 font-sans">
-                  NH-24 Expressway (2.5 KM)
-                </p>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 transition-all group-hover:border-white/20">
-                <p className="text-[10px] uppercase tracking-wider text-slate-400 font-extrabold font-sans">
-                  Transit Time
-                </p>
-                <p className="text-xs sm:text-sm text-[#fffc4d] font-bold mt-1 font-sans">
-                  20 Min from Indirapuram & Noida Sec 62
-                </p>
-              </div>
-            </div>
-
-            {/* Bottom Action Button */}
-            <div className="pt-2">
-              <a
-                href="https://maps.google.com/?q=NIMT+Beacon+School+Ansal+Avantika-II+Ghaziabad"
-                target="_blank"
-                rel="noreferrer"
-                className="w-full bg-[#0041f5] hover:bg-blue-600 text-white text-center py-4 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-wider transition-all duration-300 shadow-xl shadow-blue-600/30 flex items-center justify-center gap-2 font-sans transform hover:-translate-y-0.5"
-              >
-                <Navigation className="w-4 h-4" />
-                Launch Live GPS Directions
-              </a>
-            </div>
-
-          </div>
-        </div>
+      {/* Right Column: Embedded Google Map for Exact Place Listing */}
+      <div className="lg:col-span-7 h-[380px] lg:h-full min-h-[380px] rounded-2xl overflow-hidden shadow-md border border-slate-300">
+        <iframe
+          title="NIMT Beacon School Location Map"
+          src="https://maps.google.com/maps?q=NIMT+School&ftid=0x390cf23c33895dd5:0xdd7935e9b376c294&hl=en&z=17&output=embed"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen={false}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full h-full grayscale-[20%] contrast-[105%]"
+        />
       </div>
 
     </div>

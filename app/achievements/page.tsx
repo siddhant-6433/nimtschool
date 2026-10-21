@@ -647,55 +647,6 @@ export default function AchievementsPage() {
         </div>
       </section>
 
-      {/* --- SECTION 3: ACADEMIC ACHIEVEMENTS --- */}
-      <section id="academics" className="py-24 lg:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-2xl mx-auto mb-20 space-y-4">
-            <span className="text-xs uppercase tracking-widest font-bold text-[#0041f5]">Scholastic Laurels</span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Academic Achievements</h2>
-            <p className="text-slate-600 leading-relaxed text-sm md:text-base">
-              Honoring academic thoroughness and individual growth across core board curriculums and high subject honors.
-            </p>
-          </div>
-
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {academicCards.map((card) => (
-              <div 
-                key={card.id}
-                className="group flex flex-col h-full bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 overflow-hidden"
-              >
-                {/* Image */}
-                <div className="relative h-64 w-full overflow-hidden">
-                  <Image 
-                    src={card.image} 
-                    alt={card.title} 
-                    fill
-                    className="object-cover group-hover:scale-105 transition-all duration-700"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#0041f5] uppercase tracking-wider shadow-sm">
-                    {card.category}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-8 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold text-slate-900 tracking-tight group-hover:text-[#0041f5] transition duration-200">
-                    {card.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed mt-3 flex-grow">
-                    {card.description}
-                  </p>
-                
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
 
   
 
@@ -760,7 +711,7 @@ export default function AchievementsPage() {
             Your Child Could Be Our Next Success Story
           </h2>
           <p className="text-white/85 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Admissions are fully open from Nursery to Class XII. Give your child the foundational parameters of elite scholarship, ethical leadership, and high technology competence.
+          Admissions are open from Nursery to Class XII. Help your child build a strong foundation in learning, values, leadership, and technology.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">

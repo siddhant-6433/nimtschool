@@ -433,7 +433,7 @@ export default function AcademicsPage() {
                 className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border border-white"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
+                  src="/nimt-students-discussion.webp"
                   alt="Students actively learning with teacher guidance in a modern class"
                   fill
                   priority
@@ -502,20 +502,14 @@ export default function AcademicsPage() {
             <div className="lg:col-span-7">
               <div className="relative h-[380px] sm:h-[500px] rounded-3xl overflow-hidden shadow-xl border border-slate-100">
                 <Image
-                  src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=1200"
+                  src="/nimt-students-lab.webp"
                   alt="High quality school campus building, bright day"
                   fill
                   className="object-cover transition-transform duration-700 hover:scale-102"
                   referrerPolicy="no-referrer"
                 />
                 
-                {/*  quote overlays */}
-                <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-white/40 shadow-xl max-w-md hidden sm:block">
-                  <p className="text-slate-800 text-sm font-medium italic leading-relaxed">
-                    &ldquo;We do not teach children what to think, but how to think critically, express confidently, and adapt beautifully.&rdquo;
-                  </p>
-                  <span className="block text-xs font-bold text-[#0041f5] mt-3 tracking-widest uppercase">Academic Dean</span>
-                </div>
+          
               </div>
             </div>
 
@@ -706,7 +700,7 @@ export default function AcademicsPage() {
             <div className="lg:col-span-7">
               <div className="relative h-[400px] sm:h-[550px] rounded-3xl overflow-hidden shadow-2xl border border-white">
                 <Image
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200"
+                  src="/iit.webp"
                   alt="High school students working closely together on problem solving"
                   fill
                   className="object-cover"
@@ -739,18 +733,14 @@ export default function AcademicsPage() {
             {/* Left Photo column */}
             <div className="lg:col-span-6 relative h-[400px] sm:h-[550px] rounded-3xl overflow-hidden border border-slate-100 shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1544717302-de2939b7ef71?auto=format&fit=crop&q=80&w=1200"
+                src="/mimt-students-pitching.webp"
                 alt="Teacher smiling warmly while interacting in clean  classroom"
                 fill
                 className="object-cover"
                 referrerPolicy="no-referrer"
               />
               {/* Overlay quote */}
-              <div className="absolute inset-x-6 bottom-6 bg-white/95 backdrop-blur-md p-6 rounded-2xl border border-white/40 shadow-xl">
-                <span className="block text-[#0041f5] text-xs font-bold uppercase tracking-wider mb-2">Our Educators</span>
-                <h5 className="font-extrabold text-slate-900 text-base mb-1">Passionate, Highly Trained Mentors</h5>
-                <p className="text-slate-500 text-xs leading-relaxed">Guiding every single student step-by-step with patient care, continuous assessment, and personal encouragement.</p>
-              </div>
+            
             </div>
 
             {/* Right details column */}
