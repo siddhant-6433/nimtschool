@@ -265,33 +265,48 @@ export default function Home() {
     }
   }, [heroVideoReady]);
 
-  const faqs = [
-    {
-      question: "What is the admission procedure for the 2026-27 academic year?",
-      answer:
-        "The process starts by filling out our online Inquiry Form or visiting the school campus in Ghaziabad. Our admissions team will then guide you through a personalized campus tour, an interactive session with the parents, and a baseline skill assessment for your child to determine placement.",
-    },
-    {
-      question: "What streams and integrated competitive coaching are offered?",
-      answer:
-        "NIMT Beacon School offers Science, Commerce, and Humanities. We provide an Integrated Foundation program for JEE (Engineering) & NEET (Medical) from Class VI onwards, taught by  coaching veterans, fully synchronized with CBSE hours.",
-    },
-    {
-      question: "What is the structure and schedule of the Day Boarding program?",
-      answer:
-        "Our Day Boarding operates from 9:00 AM to 5:00 PM. From 9:00 AM to 2:00 PM, children follow academic cycles. From 2:00 PM onwards, they enjoy nutritious hot lunches, followed by mandatory supervised homework tutorials, foreign language classes, and specialized sports coaching.",
-    },
-    {
-      question: "Can you describe the boarding and safety configurations on campus?",
-      answer:
-        "We maintain  air-conditioned separate wings for boys and girls, supervised by experienced resident house wardens. Security is absolute: 24/7 CCTV surveillance, biometric check-ins, a full-time residential nurse with ambulance access, and organic, healthy meals prepared under strict hygiene standards.",
-    },
-    {
-      question: "Where is NIMT Beacon School situated, and is transportation available?",
-      answer:
-        "The campus is situated in Ansal Avantika-II, Ghaziabad, Uttar Pradesh. We operate a fleet of , fully air-conditioned GPS-enabled school buses with on-board cameras, male/female security guards, and real-time tracking apps for parents.",
-    },
-  ];
+const faqs = [
+  {
+    question: "What is the admission process at NIMT Beacon School?",
+    answer:
+      "To start the admission process, parents can fill out the enquiry form on our website or visit the school campus. Our admission team will share the details about the school, available classes, fees, and the next steps.",
+  },
+  {
+    question: "Which classes are open for admission at NIMT Beacon School?",
+    answer:
+      "NIMT Beacon School offers admission from Nursery to Class XII. Parents can contact the school to check the current availability for their child's class and learn about the admission process.",
+  },
+  {
+    question: "Does NIMT Beacon School offer JEE and NEET preparation?",
+    answer:
+      "Yes. NIMT Beacon School offers integrated JEE and NEET preparation for students in Classes XI and XII. The preparation is planned along with the regular school curriculum.",
+  },
+  {
+    question: "What is the Day Boarding facility at NIMT Beacon School?",
+    answer:
+      "The Day Boarding programme allows students to stay at school for extended hours. Along with regular classes, students get time for study support, activities, sports, and other learning programmes before returning home.",
+  },
+  {
+    question: "Does NIMT Beacon School provide boarding facilities?",
+    answer:
+      "Yes. NIMT Beacon School offers residential boarding facilities for students. The programme includes regular schooling along with supervised study time, activities, sports, and residential care.",
+  },
+  {
+    question: "Where is NIMT Beacon School located?",
+    answer:
+      "NIMT Beacon School is located in Avantika, Ghaziabad, Uttar Pradesh. Parents can visit the campus to learn more about the school, facilities, admission process, and available programmes.",
+  },
+  {
+    question: "Does NIMT Beacon School provide school transport?",
+    answer:
+      "Yes. School transport is available for students from selected areas of Ghaziabad and nearby locations. Parents can contact the school to check the available routes and transport details.",
+  },
+  {
+    question: "What facilities are available at NIMT Beacon School?",
+    answer:
+      "The school has facilities for academics, sports, computer learning, science labs, co-curricular activities, and student development. Day Boarding and residential facilities are also available.",
+  },
+];
 
   const toggleFaq = (idx: number) => {
     setOpenFaq(openFaq === idx ? null : idx);
@@ -1424,95 +1439,95 @@ export default function Home() {
       {/* SECTION 15: CAMPUS LOCATION AND MAP */}
  {/* SECTION: CAMPUS LOCATION */}
 <section id="campus-location" className="py-12 lg:py-16 bg-[#f6eada] text-slate-900 font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {/* Section Heading */}
+    <div className="mb-8">
+      <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">
+        Visit Us
+      </span>
+      <h2 className="text-2xl sm:text-3xl font-black text-slate-950 mt-1">
+        NIMT Beacon School Ghaziabad
+      </h2>
+    </div>
+
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      {/* Left Column: Quick Contact & Address (NAP for Local SEO) */}
+      <div className="lg:col-span-5 space-y-4">
         
-        {/* Section Heading */}
-        <div className="mb-8">
-          <span className="text-[#0041f5] text-xs font-black tracking-widest uppercase">
-            Visit Us
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-950 mt-1">
-            NIMT Beacon School Ghaziabad
-          </h2>
+        {/* Address Card */}
+        <address className="not-italic bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+          <div className="p-2.5 rounded-xl bg-[#0041f5]/10 text-[#0041f5] shrink-0">
+            <MapPin className="w-5 h-5" />
+          </div>
+          <div className="text-xs space-y-1">
+            <h3 className="font-bold text-sm text-slate-950">Campus Address</h3>
+            <p className="text-slate-700 leading-snug">
+              Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar, Ghaziabad, Uttar Pradesh 201002
+            </p>
+            <p className="text-slate-500 font-medium pt-1">Landmark: Near NH-24 Expressway</p>
+          </div>
+        </address>
+
+        {/* Quick Connectivity */}
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+          <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-700 shrink-0">
+            <Navigation className="w-5 h-5" />
+          </div>
+          <div className="text-xs space-y-1">
+            <h3 className="font-bold text-sm text-slate-950">Connectivity</h3>
+            <ul className="text-slate-700 space-y-1 pt-1 list-disc list-inside">
+              <li>2.5 KM from NH-24 / Delhi-Meerut Expressway</li>
+              <li>20 Min drive from Indirapuram & Noida Sec 62</li>
+            </ul>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Column: Quick Contact & Address (NAP for Local SEO) */}
-          <div className="lg:col-span-5 space-y-4">
-            
-            {/* Address Card */}
-            <address className="not-italic bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
-              <div className="p-2.5 rounded-xl bg-[#0041f5]/10 text-[#0041f5] shrink-0">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div className="text-xs space-y-1">
-                <h3 className="font-bold text-sm text-slate-950">Campus Address</h3>
-                <p className="text-slate-700 leading-snug">
-                  Ansal, Avantika Ext Rd, Avantika Colony, Shastri Nagar, Ghaziabad, Uttar Pradesh 201002
-                </p>
-                <p className="text-slate-500 font-medium pt-1">Landmark: Near NH-24 Expressway</p>
-              </div>
-            </address>
-
-            {/* Quick Connectivity */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
-              <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-700 shrink-0">
-                <Navigation className="w-5 h-5" />
-              </div>
-              <div className="text-xs space-y-1">
-                <h3 className="font-bold text-sm text-slate-950">Connectivity</h3>
-                <ul className="text-slate-700 space-y-1 pt-1 list-disc list-inside">
-                  <li>2.5 KM from NH-24 / Delhi-Meerut Expressway</li>
-                  <li>20 Min drive from Indirapuram & Noida Sec 62</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Operating Hours & Contact */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
-              <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 shrink-0">
-                <Clock className="w-5 h-5" />
-              </div>
-              <div className="text-xs space-y-1">
-                <h3 className="font-bold text-sm text-slate-950">Visiting Hours</h3>
-                <p className="text-slate-700">Mon – Sat: 8:00 AM – 3:30 PM</p>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row gap-3">
-              <a
-                href="https://maps.google.com/?q=NIMT+Beacon+School+Ghaziabad"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 bg-[#0041f5] hover:bg-blue-700 text-white text-center py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md"
-              >
-                <Navigation className="w-4 h-4" />
-                Get Directions
-              </a>
-            </div>
-
+        {/* Operating Hours & Contact */}
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+          <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 shrink-0">
+            <Clock className="w-5 h-5" />
           </div>
-
-          {/* Right Column: Embedded Google Map */}
-          <div className="lg:col-span-7 h-[380px] lg:h-full min-h-[380px] rounded-2xl overflow-hidden shadow-md border border-slate-300">
-            <iframe
-              title="NIMT Beacon School Location Map"
-              src="https://www.google.com/maps/place/NIMT+School/@28.6759172,77.4884642,17z/data=!3m1!4b1!4m6!3m5!1s0x390cf23c33895dd5:0xdd7935e9b376c294!8m2!3d28.6759172!4d77.4884642!16s%2Fg%2F113hfc4sb?hl=en-GB&entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-full grayscale-[20%] contrast-[105%]"
-            />
+          <div className="text-xs space-y-1">
+            <h3 className="font-bold text-sm text-slate-950">Visiting Hours</h3>
+            <p className="text-slate-700">Mon – Sat: 8:00 AM – 3:30 PM</p>
           </div>
-
         </div>
+
+        {/* Action Buttons */}
+        <div className="pt-2 flex flex-col sm:flex-row gap-3">
+          <a
+            href="https://www.google.com/maps/place/NIMT+School/@28.6759172,77.4858839,17z/data=!4m6!3m5!1s0x390cf23c33895dd5:0xdd7935e9b376c294!8m2!3d28.6759172!4d77.4884642!16s%2Fg%2F113hfc4sb"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 bg-[#0041f5] hover:bg-blue-700 text-white text-center py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md"
+          >
+            <Navigation className="w-4 h-4" />
+            Get Directions
+          </a>
+        </div>
+
       </div>
-    </section>
+
+      {/* Right Column: Embedded Google Map for Exact Place Listing */}
+      <div className="lg:col-span-7 h-[380px] lg:h-full min-h-[380px] rounded-2xl overflow-hidden shadow-md border border-slate-300">
+        <iframe
+          title="NIMT Beacon School Location Map"
+          src="https://maps.google.com/maps?q=NIMT+School&ftid=0x390cf23c33895dd5:0xdd7935e9b376c294&hl=en&z=17&output=embed"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen={false}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full h-full grayscale-[20%] contrast-[105%]"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
     </div>
   );
 }
