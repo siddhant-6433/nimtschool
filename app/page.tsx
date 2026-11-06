@@ -6,6 +6,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import InstagramReels from "@/components/InstagramReels";
+import { supabase } from '@/lib/supabase'; // Import your Supabase client
 import { pushLeadToUniOs } from "@/lib/crm";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -53,13 +54,14 @@ export default function Home() {
   
   // Setup Admissions Form state
   const [formSubmitted, setFormSubmitted] = useState(false);
+
   const [formData, setFormData] = useState({
-    parentName: "",
     studentName: "",
     phone: "",
-    email: "",
     targetClass: "Nursery",
   });
+const [loading, setLoading] = useState<boolean>(false);
+const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleFormInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -67,12 +69,10 @@ export default function Home() {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.parentName && formData.studentName && formData.phone) {
+    if (formData.studentName && formData.phone) {
       pushLeadToUniOs({
         studentName: formData.studentName,
-        guardianName: formData.parentName,
         phone: formData.phone,
-        email: formData.email,
         course: formData.targetClass,
         source: "homepage-admissions-form",
       });
@@ -80,10 +80,8 @@ export default function Home() {
       setTimeout(() => {
         setFormSubmitted(false);
         setFormData({
-          parentName: "",
           studentName: "",
           phone: "",
-          email: "",
           targetClass: "Nursery",
         });
       }, 5000);
@@ -1240,149 +1238,157 @@ const faqs = [
       </div>
 
       {/* Right Column: Lead Capture Form Card */}
-      <div className="lg:col-span-6">
-        <div className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl border border-slate-100 relative font-sans">
-          
-          {/* Badge */}
-          <div className="absolute top-6 right-6 bg-red-50 text-red-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse border border-red-200/80">
-            Admissions Open
-          </div>
+    <div className="lg:col-span-6">
+  <div className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl border border-slate-100 relative font-sans">
+    
+    {/* Badge */}
+    <div className="absolute top-6 right-6 bg-red-50 text-red-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse border border-red-200/80">
+      Admissions Open
+    </div>
 
-          <div className="mb-6 space-y-1">
-            <h3 className="font-sans font-black text-2xl text-slate-950 tracking-tight">
-              Request Admissions Kit
-            </h3>
-            <p className="text-xs text-slate-500 font-sans">
-              Complete information details for rapid priority processing.
+    <div className="mb-6 space-y-1">
+      <h3 className="font-sans font-black text-2xl text-slate-950 tracking-tight">
+        Request Admissions Kit
+      </h3>
+      <p className="text-xs text-slate-500 font-sans">
+        Complete information details for rapid priority processing.
+      </p>
+    </div>
+
+   
+
+    {formSubmitted ? (
+      <div className="bg-emerald-50/60 border border-emerald-500/20 p-8 rounded-2xl text-center space-y-4 my-4 font-sans">
+        <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mx-auto shadow-sm">
+          <CheckCircle2 className="w-7 h-7" />
+        </div>
+        <h4 className="font-sans font-bold text-lg text-slate-900">
+          Inquiry Received Successfully!
+        </h4>
+        <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto font-sans">
+          Thank you! Our lead admissions counselor will call you at <span className="font-bold text-slate-900">+91 {formData.phone}</span> within 2 business hours with full prospectus sheets and fee structure details.
+        </p>
+      </div>
+    ) : (
+      <form 
+        onSubmit={async (e) => {
+          e.preventDefault();
+          setErrorMsg(null);
+
+          if (formData.phone.length !== 10) {
+            setErrorMsg("Please enter a valid 10-digit mobile number.");
+            return;
+          }
+
+          setLoading(true);
+
+          try {
+            const { error } = await supabase.from('admissions_leads').insert([
+              {
+                student_name: formData.studentName,
+                mobile: formData.phone,
+                grade: formData.targetClass,
+                session: '2027-2028',
+                source: 'admissions-kit-form',
+                created_at: new Date().toISOString(),
+              },
+            ]);
+
+            if (error) throw error;
+            setFormSubmitted(true);
+          } catch (err: any) {
+            console.error('Supabase error:', err.message);
+            setErrorMsg('Failed to submit inquiry. Please try again.');
+          } finally {
+            setLoading(false);
+          }
+        }} 
+        className="space-y-4 font-sans text-left"
+      >
+        <div>
+          <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+            Student's Full Name *
+          </label>
+          <input
+            type="text"
+            required
+            value={formData.studentName}
+            onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
+            placeholder="e.g. Aryan Malhotra"
+            className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+          />
+        </div>
+
+        <div>
+          <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+            Active Phone / Mobile Number (10 Digits) *
+          </label>
+          <div className="flex">
+            <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-200 bg-slate-100 text-slate-600 text-xs font-semibold font-sans">
+              +91
+            </span>
+            <input
+              type="tel"
+              required
+              maxLength={10}
+              pattern="[0-9]{10}"
+              value={formData.phone}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+                setFormData({ ...formData, phone: value });
+              }}
+              placeholder="9876543210"
+              className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-r-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+            />
+          </div>
+          {formData.phone.length > 0 && formData.phone.length < 10 && (
+            <p className="mt-1 text-red-500 text-[11px] font-sans">
+              Mobile number must be exactly 10 digits
             </p>
-          </div>
-
-          {formSubmitted ? (
-            <div className="bg-emerald-50/60 border border-emerald-500/20 p-8 rounded-2xl text-center space-y-4 my-4 font-sans">
-              <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 mx-auto shadow-sm">
-                <CheckCircle2 className="w-7 h-7" />
-              </div>
-              <h4 className="font-sans font-bold text-lg text-slate-900">
-                Inquiry Received Successfully!
-              </h4>
-              <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto font-sans">
-                Thank you! Our lead admissions counselor will call you within 2 business hours with full pricing catalogs, prospectus sheets, and campus tour schedules.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleFormSubmit} className="space-y-4 font-sans">
-              <div>
-                <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
-                  Parent / Guardian Name *
-                </label>
-                <input
-                  type="text"
-                  name="parentName"
-                  required
-                  value={formData.parentName}
-                  onChange={handleFormInputChange}
-                  placeholder="e.g. Vikram Malhotra"
-                  className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
-                    Student's Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="studentName"
-                    required
-                    value={formData.studentName}
-                    onChange={handleFormInputChange}
-                    placeholder="e.g. Aryan Malhotra"
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
-                    Grade / Class Seeking *
-                  </label>
-                  <select
-                    name="targetClass"
-                    value={formData.targetClass}
-                    onChange={handleFormInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
-                  >
-                    <option value="Nursery">Nursery / Play School</option>
-                    <option value="Primary">Primary (I - V)</option>
-                    <option value="Middle">Middle (VI - VIII)</option>
-                    <option value="Secondary">Secondary (IX - X)</option>
-                    <option value="SeniorSec">Senior Secondary (XI - XII)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
-                    Active Phone (WhatsApp) *
-                  </label>
-                  <div className="flex">
-                    <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-200 bg-slate-100 text-slate-600 text-xs font-semibold font-sans">
-                      +91
-                    </span>
-                    <input
-                      type="text"
-                      name="phone"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/\D/g, "");
-                        if (value.length <= 10) {
-                          setFormData({
-                            ...formData,
-                            phone: value,
-                          });
-                        }
-                      }}
-                      placeholder="9876543210"
-                      maxLength={10}
-                      pattern="[0-9]{10}"
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-r-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
-                    />
-                  </div>
-                  {formData.phone.length > 0 && formData.phone.length < 10 && (
-                    <p className="mt-1 text-red-500 text-[11px] font-sans">
-                      Mobile number must be exactly 10 digits
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleFormInputChange}
-                    placeholder="e.g. parent@email.com"
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-3">
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-xl text-xs font-extrabold tracking-wider uppercase bg-[#0041f5] text-white hover:bg-blue-600 transition-all font-sans shadow-lg shadow-blue-500/25 hover:shadow-blue-500/35 cursor-pointer text-center transform hover:-translate-y-0.5"
-                >
-                  Submit Official Admissions Request
-                </button>
-              </div>
-            </form>
           )}
         </div>
-      </div>
+
+        <div>
+          <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+            Class / Grade Seeking Admission *
+          </label>
+          <select
+            value={formData.targetClass}
+            onChange={(e) => setFormData({ ...formData, targetClass: e.target.value })}
+            className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+          >
+            <option value="Pre-Nursery">Pre-Nursery</option>
+            <option value="Nursery">Nursery</option>
+            <option value="LKG / Kindergarten">LKG / Kindergarten</option>
+            <option value="UKG">UKG</option>
+            <option value="Grade I">Grade I</option>
+            <option value="Grade II">Grade II</option>
+            <option value="Grade III">Grade III</option>
+            <option value="Grade IV">Grade IV</option>
+            <option value="Grade V">Grade V</option>
+            <option value="Grade VI">Grade VI</option>
+            <option value="Grade VII">Grade VII</option>
+            <option value="Grade VIII">Grade VIII</option>
+            <option value="Grade IX">Grade IX</option>
+            <option value="Grade X">Grade X</option>
+            <option value="Grade XI">Grade XI</option>
+            <option value="Grade XII">Grade XII</option>
+          </select>
+        </div>
+
+        <div className="pt-3">
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-4 rounded-xl text-xs font-extrabold tracking-wider uppercase bg-[#0041f5] text-white hover:bg-blue-600 transition-all font-sans shadow-lg shadow-blue-500/25 hover:shadow-blue-500/35 cursor-pointer text-center transform hover:-translate-y-0.5 disabled:opacity-50"
+          >
+            {loading ? 'Submitting Request...' : 'Submit Official Admissions Request'}
+          </button>
+        </div>
+      </form>
+    )}
+  </div>
+</div>
 
     </div>
   </div>
@@ -1453,7 +1459,7 @@ const faqs = [
 
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
-      {/* Left Column: Quick Contact & Address (NAP for Local SEO) */}
+      {/* Left Column: Quick Contact & Address */}
       <div className="lg:col-span-5 space-y-4">
         
         {/* Address Card */}
@@ -1510,19 +1516,19 @@ const faqs = [
 
       </div>
 
-      {/* Right Column: Embedded Google Map for Exact Place Listing */}
+      {/* Right Column: Embedded Google Map with Exact Pin Marker */}
       <div className="lg:col-span-7 h-[380px] lg:h-full min-h-[380px] rounded-2xl overflow-hidden shadow-md border border-slate-300">
-        <iframe
-          title="NIMT Beacon School Location Map"
-          src="https://maps.google.com/maps?q=NIMT+School&ftid=0x390cf23c33895dd5:0xdd7935e9b376c294&hl=en&z=17&output=embed"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen={false}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="w-full h-full grayscale-[20%] contrast-[105%]"
-        />
+<iframe
+  title="NIMT Beacon School Location Map"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.378772391219!2d77.4858839!3d28.6759172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf23c33895dd5%3A0xdd7935e9b376c294!2sNIMT%20School!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+  width="100%"
+  height="100%"
+  style={{ border: 0 }}
+  allowFullScreen={false}
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+  className="w-full h-full grayscale-[20%] contrast-[105%]"
+/>
       </div>
 
     </div>
