@@ -45,17 +45,25 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-M43GBQREB3"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-M43GBQREB3');
+            `,
+          }}
+        />
+
         {/* Preconnect to third-party origins used on first paint */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
         <link rel="preconnect" href="https://picsum.photos" crossOrigin="" />
 
-        {/* 1. Google Tag Manager — loaded LAZILY (on first interaction or after a
-            short idle fallback) instead of eagerly. GTM cascades into GA4, Google
-            Ads and the Meta Pixel (~600KB of JS); loading those during the initial
-            render saturates the main thread and pushes LCP out by ~1.8s. Deferring
-            them keeps the hero paint fast while analytics still fires within a few
-            seconds / as soon as the user engages. */}
+        {/* 1. Google Tag Manager — loaded LAZILY (on first interaction or after a short idle fallback) */}
         <Script
           id="gtm-lazy-loader"
           strategy="afterInteractive"
@@ -67,7 +75,7 @@ export default function RootLayout({
                 var events=['scroll','mousemove','touchstart','click','keydown'];
                 function loadGTM(){
                   if(loaded)return; loaded=true;
-                  events.forEach(function(e){w.removeEventListener(e,loadGTN || loadGTM);});
+                  events.forEach(function(e){w.removeEventListener(e,loadGTM);});
                   w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
                   var f=d.getElementsByTagName(s)[0],
                       j=d.createElement(s),
@@ -98,9 +106,7 @@ export default function RootLayout({
 
         <AdmissionsProvider>
           <Navbar />
-          {/* Offsets the extra height the announcement banner adds to the
-              fixed header, so page content padded for the old navbar height
-              still clears it. */}
+          {/* Offsets the extra height the announcement banner adds to the fixed header */}
           <main className="flex-grow pt-9">
             {children}
           </main>

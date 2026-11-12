@@ -14,6 +14,7 @@ export default function ApplyNowModal({ isOpen, onClose }: ApplyNowModalProps) {
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [leadId, setLeadId] = useState<string | null>(null);
 
   const [form, setForm] = useState({
     studentName: '',
@@ -21,6 +22,15 @@ export default function ApplyNowModal({ isOpen, onClose }: ApplyNowModalProps) {
     grade: 'Grade I',
     session: '2027-2028'
   });
+
+  // Supabase Edge Function Endpoints & Config (Next.js compatible)
+  const SUPABASE_URL =
+    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://deylhigsisuexszsmypq.supabase.co';
+  const SUPABASE_ANON_KEY =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_pgYgbNk-tiiQRN3Ll6wDiw_zg8zVHuO';
+  
+  const INGEST_URL = SUPABASE_URL ? `${SUPABASE_URL}/functions/v1/lead-ingest?source=apply-now-modal` : '';
+  const UPDATE_URL = SUPABASE_URL ? `${SUPABASE_URL}/functions/v1/callback-update` : '';
 
   const handleMobileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Strip non-digit characters and truncate to exactly 10 digits
@@ -41,23 +51,75 @@ export default function ApplyNowModal({ isOpen, onClose }: ApplyNowModalProps) {
     setLoading(true);
 
     try {
-      // Insert directly into Supabase table 'admissions_leads'
-      const { error } = await supabase.from('admissions_leads').insert([
-        {
-          student_name: form.studentName,
-          mobile: form.mobile,
-          grade: form.grade,
-          session: form.session,
-          source: 'apply-now-modal',
-          created_at: new Date().toISOString(),
-        },
-      ]);
+      let createdId: string | null = null;
 
-      if (error) throw error;
+      // 1. Try calling the Supabase Edge Function 'lead-ingest'
+      if (INGEST_URL) {
+        const res = await fetch(INGEST_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            phone: form.mobile,
+            name: form.studentName,
+            grade: form.grade,
+            session: form.session,
+            source: 'apply-now-modal',
+          }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          createdId = data.lead?.id || data.lead_id || null;
+        }
+      }
+
+      // 2. Fallback: Direct insert into 'admissions_leads' table if Edge Function is skipped/unavailable
+      if (!createdId && supabase) {
+        const { data: leadData, error } = await supabase
+          .from('admissions_leads')
+          .insert([
+            {
+              student_name: form.studentName,
+              mobile: form.mobile,
+              grade: form.grade,
+              session: form.session,
+              source: 'apply-now-modal',
+              created_at: new Date().toISOString(),
+            },
+          ])
+          .select()
+          .single();
+
+        if (error) throw error;
+        if (leadData) createdId = leadData.id;
+      }
+
+      setLeadId(createdId);
+
+      // 3. Optional: Sync additional metadata asynchronously if update endpoint is configured
+      if (createdId && UPDATE_URL) {
+        await fetch(UPDATE_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            lead_id: createdId,
+            grade: form.grade,
+            session: form.session,
+          }),
+        }).catch((err) => console.error('Background callback update error:', err));
+      }
 
       setSubmitted(true);
     } catch (err: any) {
-      console.error('Supabase insertion error:', err.message);
+      console.error('Submission error:', err.message || err);
       setErrorMsg('Failed to submit application. Please try again.');
     } finally {
       setLoading(false);
@@ -73,6 +135,7 @@ export default function ApplyNowModal({ isOpen, onClose }: ApplyNowModalProps) {
     });
     setSubmitted(false);
     setErrorMsg(null);
+    setLeadId(null);
     onClose();
   };
 
