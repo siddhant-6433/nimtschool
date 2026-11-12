@@ -50,7 +50,110 @@ export default function Home() {
       }
     });
   };
+    const [leadId, setLeadId] = useState<string | null>(null);
+  const SUPABASE_URL =
+    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://deylhigsisuexszsmypq.supabase.co';
+  const SUPABASE_ANON_KEY =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_pgYgbNk-tiiQRN3Ll6wDiw_zg8zVHuO';
+  
+  const INGEST_URL = SUPABASE_URL ? `${SUPABASE_URL}/functions/v1/lead-ingest?source=admissions-kit-form` : '';
+  const UPDATE_URL = SUPABASE_URL ? `${SUPABASE_URL}/functions/v1/callback-update` : '';
 
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg(null);
+
+    // Validate 10-digit mobile number before submission
+    if (formData.phone.length !== 10) {
+      setErrorMsg("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      let createdId: string | null = null;
+
+      // 1. Try calling the Supabase Edge Function 'lead-ingest'
+      if (INGEST_URL) {
+        const res = await fetch(INGEST_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            phone: formData.phone,
+            name: formData.studentName,
+            grade: formData.targetClass,
+            session: '2027-2028',
+            source: 'admissions-kit-form',
+          }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          createdId = data.lead?.id || data.lead_id || null;
+        }
+      }
+
+      // 2. Fallback: Direct insert into 'admissions_leads' table if Edge Function is skipped/unavailable
+      if (!createdId && supabase) {
+        const { data: leadData, error } = await supabase
+          .from('admissions_leads')
+          .insert([
+            {
+              student_name: formData.studentName,
+              mobile: formData.phone,
+              grade: formData.targetClass,
+              session: '2027-2028',
+              source: 'admissions-kit-form',
+              created_at: new Date().toISOString(),
+            },
+          ])
+          .select()
+          .single();
+
+        if (error) throw error;
+        if (leadData) createdId = leadData.id;
+      }
+
+      setLeadId(createdId);
+
+      // 3. Optional background sync update if update endpoint is configured
+      if (createdId && UPDATE_URL) {
+        await fetch(UPDATE_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            lead_id: createdId,
+            grade: formData.targetClass,
+            session: '2027-2028',
+          }),
+        }).catch((err) => console.error('Background callback update error:', err));
+      }
+
+      // CRM Push
+      pushLeadToUniOs({
+        studentName: formData.studentName,
+        phone: formData.phone,
+        course: formData.targetClass,
+        source: "admissions-kit-form",
+      });
+
+      setFormSubmitted(true);
+    } catch (err: any) {
+      console.error('Supabase error:', err.message || err);
+      setErrorMsg('Failed to submit inquiry. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
   
   // Setup Admissions Form state
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -67,26 +170,6 @@ const [errorMsg, setErrorMsg] = useState<string | null>(null);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.studentName && formData.phone) {
-      pushLeadToUniOs({
-        studentName: formData.studentName,
-        phone: formData.phone,
-        course: formData.targetClass,
-        source: "homepage-admissions-form",
-      });
-      setFormSubmitted(true);
-      setTimeout(() => {
-        setFormSubmitted(false);
-        setFormData({
-          studentName: "",
-          phone: "",
-          targetClass: "Nursery",
-        });
-      }, 5000);
-    }
-  };
 
   // State for interactive Timeline/Curriculum Journey
   const [activeTimelineStage, setActiveTimelineStage] = useState("early");
@@ -1248,10 +1331,10 @@ const faqs = [
 
     <div className="mb-6 space-y-1">
       <h3 className="font-sans font-black text-2xl text-slate-950 tracking-tight">
-        Request Admissions Kit
+       Request Your School Prospectus
       </h3>
       <p className="text-xs text-slate-500 font-sans">
-        Complete information details for rapid priority processing.
+      Get details about admissions, school facilities, programmes and fees.
       </p>
     </div>
 
@@ -1263,130 +1346,102 @@ const faqs = [
           <CheckCircle2 className="w-7 h-7" />
         </div>
         <h4 className="font-sans font-bold text-lg text-slate-900">
-          Inquiry Received Successfully!
+         Thank You! Your Enquiry Has Been Received.
         </h4>
         <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto font-sans">
-          Thank you! Our lead admissions counselor will call you at <span className="font-bold text-slate-900">+91 {formData.phone}</span> within 2 business hours with full prospectus sheets and fee structure details.
+          Thank you! Our lead admissions counselor will call you at <span className="font-bold text-slate-900">+91 {formData.phone}</span> within 2 hours with full prospectus sheets and fee structure details.
         </p>
       </div>
     ) : (
-      <form 
-        onSubmit={async (e) => {
-          e.preventDefault();
-          setErrorMsg(null);
+              <form onSubmit={handleFormSubmit} className="space-y-4 font-sans text-left">
+                {errorMsg && (
+                  <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-lg font-medium">
+                    {errorMsg}
+                  </div>
+                )}
 
-          if (formData.phone.length !== 10) {
-            setErrorMsg("Please enter a valid 10-digit mobile number.");
-            return;
-          }
+                <div>
+                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+                    Student's Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.studentName}
+                    onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
+                    placeholder="e.g. Aryan Malhotra"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+                  />
+                </div>
 
-          setLoading(true);
+                <div>
+                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+                    Active Phone / Mobile Number (10 Digits) *
+                  </label>
+                  <div className="flex">
+                    <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-200 bg-slate-100 text-slate-600 text-xs font-semibold font-sans">
+                      +91
+                    </span>
+                    <input
+                      type="tel"
+                      required
+                      maxLength={10}
+                      pattern="[0-9]{10}"
+                      value={formData.phone}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, "").slice(0, 10);
+                        setFormData({ ...formData, phone: value });
+                      }}
+                      placeholder="9876543210"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-r-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+                    />
+                  </div>
+                  {formData.phone.length > 0 && formData.phone.length < 10 && (
+                    <p className="mt-1 text-red-500 text-[11px] font-sans">
+                      Mobile number must be exactly 10 digits
+                    </p>
+                  )}
+                </div>
 
-          try {
-            const { error } = await supabase.from('admissions_leads').insert([
-              {
-                student_name: formData.studentName,
-                mobile: formData.phone,
-                grade: formData.targetClass,
-                session: '2027-2028',
-                source: 'admissions-kit-form',
-                created_at: new Date().toISOString(),
-              },
-            ]);
+                <div>
+                  <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
+                    Class / Grade Seeking Admission *
+                  </label>
+                  <select
+                    value={formData.targetClass}
+                    onChange={(e) => setFormData({ ...formData, targetClass: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
+                  >
+                    <option value="Pre-Nursery">Pre-Nursery</option>
+                    <option value="Nursery">Nursery</option>
+                    <option value="LKG / Kindergarten">LKG / Kindergarten</option>
+                    <option value="UKG">UKG</option>
+                    <option value="Grade I">Grade I</option>
+                    <option value="Grade II">Grade II</option>
+                    <option value="Grade III">Grade III</option>
+                    <option value="Grade IV">Grade IV</option>
+                    <option value="Grade V">Grade V</option>
+                    <option value="Grade VI">Grade VI</option>
+                    <option value="Grade VII">Grade VII</option>
+                    <option value="Grade VIII">Grade VIII</option>
+                    <option value="Grade IX">Grade IX</option>
+                    <option value="Grade X">Grade X</option>
+                    <option value="Grade XI">Grade XI</option>
+                    <option value="Grade XII">Grade XII</option>
+                  </select>
+                </div>
 
-            if (error) throw error;
-            setFormSubmitted(true);
-          } catch (err: any) {
-            console.error('Supabase error:', err.message);
-            setErrorMsg('Failed to submit inquiry. Please try again.');
-          } finally {
-            setLoading(false);
-          }
-        }} 
-        className="space-y-4 font-sans text-left"
-      >
-        <div>
-          <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
-            Student's Full Name *
-          </label>
-          <input
-            type="text"
-            required
-            value={formData.studentName}
-            onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
-            placeholder="e.g. Aryan Malhotra"
-            className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
-          />
-        </div>
-
-        <div>
-          <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
-            Active Phone / Mobile Number (10 Digits) *
-          </label>
-          <div className="flex">
-            <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-200 bg-slate-100 text-slate-600 text-xs font-semibold font-sans">
-              +91
-            </span>
-            <input
-              type="tel"
-              required
-              maxLength={10}
-              pattern="[0-9]{10}"
-              value={formData.phone}
-              onChange={(e) => {
-                const value = e.target.value.replace(/\D/g, "").slice(0, 10);
-                setFormData({ ...formData, phone: value });
-              }}
-              placeholder="9876543210"
-              className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-r-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
-            />
-          </div>
-          {formData.phone.length > 0 && formData.phone.length < 10 && (
-            <p className="mt-1 text-red-500 text-[11px] font-sans">
-              Mobile number must be exactly 10 digits
-            </p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-[10px] uppercase font-extrabold text-slate-500 tracking-wider mb-1.5 font-sans">
-            Class / Grade Seeking Admission *
-          </label>
-          <select
-            value={formData.targetClass}
-            onChange={(e) => setFormData({ ...formData, targetClass: e.target.value })}
-            className="w-full bg-slate-50 border border-slate-200 focus:border-[#0041f5] focus:bg-white rounded-xl px-4 py-3 text-xs text-slate-800 focus:outline-none transition-all font-sans"
-          >
-            <option value="Pre-Nursery">Pre-Nursery</option>
-            <option value="Nursery">Nursery</option>
-            <option value="LKG / Kindergarten">LKG / Kindergarten</option>
-            <option value="UKG">UKG</option>
-            <option value="Grade I">Grade I</option>
-            <option value="Grade II">Grade II</option>
-            <option value="Grade III">Grade III</option>
-            <option value="Grade IV">Grade IV</option>
-            <option value="Grade V">Grade V</option>
-            <option value="Grade VI">Grade VI</option>
-            <option value="Grade VII">Grade VII</option>
-            <option value="Grade VIII">Grade VIII</option>
-            <option value="Grade IX">Grade IX</option>
-            <option value="Grade X">Grade X</option>
-            <option value="Grade XI">Grade XI</option>
-            <option value="Grade XII">Grade XII</option>
-          </select>
-        </div>
-
-        <div className="pt-3">
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-4 rounded-xl text-xs font-extrabold tracking-wider uppercase bg-[#0041f5] text-white hover:bg-blue-600 transition-all font-sans shadow-lg shadow-blue-500/25 hover:shadow-blue-500/35 cursor-pointer text-center transform hover:-translate-y-0.5 disabled:opacity-50"
-          >
-            {loading ? 'Submitting Request...' : 'Submit Official Admissions Request'}
-          </button>
-        </div>
-      </form>
-    )}
+                <div className="pt-3">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full py-4 rounded-xl text-xs font-extrabold tracking-wider uppercase bg-[#0041f5] text-white hover:bg-blue-600 transition-all font-sans shadow-lg shadow-blue-500/25 hover:shadow-blue-500/35 cursor-pointer text-center transform hover:-translate-y-0.5 disabled:opacity-50"
+                  >
+                    {loading ? 'Submitting Request...' : 'Submit Official Admissions Request'}
+                  </button>
+                </div>
+              </form>
+            )}
   </div>
 </div>
 
